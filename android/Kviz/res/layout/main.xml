@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView
+    android:id="@+id/lblIp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="Ip:"
+    />
+<EditText
+    android:id="@+id/txtIp"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    />
+<TextView
+    android:id="@+id/lblName"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="Ime:"
+    />
+<EditText
+    android:id="@+id/txtName"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text=""
+    />
+<Button
+    android:id="@+id/btnRegister"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="RESIGTRACIJA"
+    />
+<Button
+    android:id="@+id/btnExit"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="IZLAZ"
+    />
+</LinearLayout>
+
