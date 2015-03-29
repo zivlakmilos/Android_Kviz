@@ -16,6 +16,41 @@ public class Database
     
     // Global variables
     private static String url = "";
-    String user = "";
-    String password = "";
+    private static String username = "";
+    private static String password = "";
+    
+    // Connect on database server
+    public static boolean connect(String ip, int port, String database,
+            String user, String pass)
+    {
+        url = "jdbc:mysql://" + ip + ":" + String.valueOf(port) +
+                "/" + database;
+        username = user;
+        password = pass;
+        
+        try
+        {
+            con = DriverManager.getConnection(url, username, password);
+            st = con.createStatement();
+        } catch(SQLException err)
+        {
+            return false;
+        }
+        
+        return true;    // This maybe not good
+    }
+    
+    // Disconnect from database server
+    public static void disconnect()
+    {
+        try
+        {
+            if(rs != null)
+                rs.close();
+            if(st != null)
+                st.close();
+            if(con != null)
+                con.close();
+        } catch(SQLException err){}
+    }
 }

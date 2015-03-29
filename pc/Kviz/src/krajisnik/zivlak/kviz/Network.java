@@ -27,7 +27,7 @@ public class Network
     {
         client.add(new Client(c, clientCount));
         client.get(clientCount).start();
-        // ToDo: update database (maybi)
+        // ToDo: update database (maybe)
         clientCount++;
     }
     
