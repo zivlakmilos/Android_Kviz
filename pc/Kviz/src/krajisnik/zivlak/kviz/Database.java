@@ -15,7 +15,7 @@ public class Database
     private static ResultSet rs = null;
     
     // Global variables
-    String url = "";
+    private static String url = "";
     String user = "";
     String password = "";
 }
