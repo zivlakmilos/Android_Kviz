@@ -64,7 +64,11 @@ public class Client extends Thread
                         name = data;
                         // ToDo: update database
                     }
-                    break;
+                break;
+                case Network.COMPETITION:
+                    // Send question
+                    // Wait for response
+                break;
             }
         }
     }

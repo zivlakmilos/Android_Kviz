@@ -2,6 +2,7 @@ package krajisnik.zivlak.kviz;
 
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class Network
     public static final int RANG = 3;           // Rang list (end competition)
     
     // Network variables
-    private static List<Client> client;
+    private static List<Client> client = new ArrayList<Client>();
     
     // Global variables
     private static int clientCount = 0;
@@ -65,7 +66,7 @@ public class Network
         {
             setAction(REGISTER);
             register.setRunning(false);
-            register.stop();
+//            register.stop();
         }
     }
     
