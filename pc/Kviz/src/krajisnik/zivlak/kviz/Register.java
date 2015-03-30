@@ -4,7 +4,7 @@ import java.net.*;
 import java.io.*;
 
 
-public class Register implements Runnable
+public class Register extends Thread
 {
     // Network variables
     private static ServerSocket server;
