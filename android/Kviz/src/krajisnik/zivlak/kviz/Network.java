@@ -14,7 +14,7 @@ public class Network
     
     public static void open(String ip)
     {
-        serverIp = ip;
+        serverIp = "192.168.1." + ip;
         //serverPort = port;
         try
         {

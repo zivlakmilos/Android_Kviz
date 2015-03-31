@@ -1,6 +1,7 @@
 /home/zi/kviz/android/Kviz/bin/classes.dex : \
 /home/zi/kviz/android/Kviz/bin/classes/krajisnik/zivlak/kviz/MainActivity$2.class \
 /home/zi/kviz/android/Kviz/bin/classes/krajisnik/zivlak/kviz/Type1$1.class \
+/home/zi/kviz/android/Kviz/bin/classes/krajisnik/zivlak/kviz/Type1$2.class \
 /home/zi/kviz/android/Kviz/bin/classes/krajisnik/zivlak/kviz/MainActivity$3.class \
 /home/zi/kviz/android/Kviz/bin/classes/krajisnik/zivlak/kviz/R$id.class \
 /home/zi/kviz/android/Kviz/bin/classes/krajisnik/zivlak/kviz/MainActivity.class \

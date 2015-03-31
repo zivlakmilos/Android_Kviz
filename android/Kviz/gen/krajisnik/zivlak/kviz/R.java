@@ -11,11 +11,13 @@ public final class R {
     public static final class attr {
     }
     public static final class id {
-        public static final int btnClose=0x7f040007;
+        public static final int btnClose1=0x7f040009;
         public static final int btnExit=0x7f040005;
         public static final int btnRegister=0x7f040004;
+        public static final int btnSend1=0x7f040008;
         public static final int lblIp=0x7f040000;
         public static final int lblName=0x7f040002;
+        public static final int txtAnswer1=0x7f040007;
         public static final int txtIp=0x7f040001;
         public static final int txtName=0x7f040003;
         public static final int txtText=0x7f040006;

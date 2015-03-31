@@ -17,7 +17,7 @@ public class ChatServer
      */
     public static void main(String[] args)
     {
-        ServerSocket server;
+        ServerSocket server = null;
         Socket client;
         DataInputStream is = null;
         DataOutputStream os = null;
@@ -25,17 +25,20 @@ public class ChatServer
         try
         {
             server = new ServerSocket(5000);
-            client = server.accept();
-            is = new DataInputStream(client.getInputStream());
-            os = new DataOutputStream(client.getOutputStream());
         } catch(IOException err){}
         
-        while(true)
+        int countClient = 0;
+        
+        while(countClient < 2)
         {
             try
             {
-                System.out.println(is.readUTF());
-                os.writeUTF("OK");
+                if(server != null)
+                {
+                    client = server.accept();
+                    new Client(client).start();
+                    countClient++;
+                }
             } catch(IOException err){}
         }
     }
