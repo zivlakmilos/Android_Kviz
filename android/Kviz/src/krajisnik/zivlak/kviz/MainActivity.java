@@ -20,7 +20,7 @@ public class MainActivity extends Activity
     private Button btnExit;
     
     // Global private variables
-    private Thread networkListener;
+    private NetworkListener networkListener;
     
     // Handler for handle thread messages
 //    public Handler handler;
@@ -39,7 +39,7 @@ public class MainActivity extends Activity
         btnRegister = (Button) this.findViewById(R.id.btnRegister);
         btnExit = (Button) this.findViewById(R.id.btnExit);
         
-        networkListener = new Thread(new NetworkListener(this));
+        networkListener = new NetworkListener(this);
         
 //        handler = new Handler();
         
@@ -70,24 +70,24 @@ public class MainActivity extends Activity
             @Override
             public void onClick(View view)
             {
-                networkListener.stop();
+                networkListener.setRun(false);
                 Network.close();
                 System.exit(0);
             }
         });
     }
     
-    public void updateIp(final String data)
-    {
-        this.runOnUiThread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                lblIp.setText(data);
-            }
-        });
-    }
+//    public void updateIp(final String data)
+//    {
+//        this.runOnUiThread(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
+//                lblIp.setText(data);
+//            }
+//        });
+//    }
     
     // Start type1 form
     public void startType1()

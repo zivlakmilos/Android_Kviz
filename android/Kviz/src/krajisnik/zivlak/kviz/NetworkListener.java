@@ -3,7 +3,7 @@ package krajisnik.zivlak.kviz;
 import android.content.Intent;
 
 
-public class NetworkListener implements Runnable
+public class NetworkListener extends Thread
 {
     // Constants
     private final int MAIN = 0;
@@ -23,6 +23,12 @@ public class NetworkListener implements Runnable
     public NetworkListener(MainActivity a)
     {
         mainActivity = a;
+    }
+    
+    // Set racn state
+    public void setRun(boolean r)
+    {
+        this.run = r;
     }
     
     // Main function of NetworkListener

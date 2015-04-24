@@ -37,7 +37,7 @@ public class Database
             return false;
         }
         
-        return true;    // This maybe not good
+        return true;    // This maybe not good idea
     }
     
     // Disconnect from database server
@@ -52,5 +52,21 @@ public class Database
             if(con != null)
                 con.close();
         } catch(SQLException err){}
+    }
+    
+    // Add client to database
+    public static void addClient(Client c)
+    {
+        try
+        {
+            st.executeQuery("");
+        } catch(SQLException err){}
+    }
+    
+    // Get question
+    public static Question getQuestion(int rb)
+    {
+        Question question = new Question();
+        return question;
     }
 }

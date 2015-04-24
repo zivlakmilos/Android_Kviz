@@ -63,11 +63,16 @@ public class Client extends Thread
                     {
                         name = data;
                         // ToDo: update database
+//                        Databases.addClient(this);
                     }
                 break;
                 case Network.COMPETITION:
                     // Send question
                     // Wait for response
+                break;
+                case Network.RANG:
+                    // Calculate and send rang list
+                    // End of competition
                 break;
             }
         }

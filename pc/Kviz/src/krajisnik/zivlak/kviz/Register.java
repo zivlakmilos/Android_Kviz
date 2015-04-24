@@ -7,8 +7,8 @@ import java.io.*;
 public class Register extends Thread
 {
     // Network variables
-    private static ServerSocket server;
-    private static Socket client;
+    private ServerSocket server;
+    private Socket client;
     
     // Global variables
     private boolean running;
