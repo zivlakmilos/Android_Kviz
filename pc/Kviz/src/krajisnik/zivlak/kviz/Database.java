@@ -19,7 +19,17 @@ public class Database
     private static String username = "";
     private static String password = "";
     
-    // Connect on database server
+    /**
+     * 
+     * Konekcija na mySQL bzu podataka.
+     * 
+     * @param ip ip adresa baze
+     * @param port port baze
+     * @param database naziv baze
+     * @param user username
+     * @param pass password
+     * @return 
+     */
     public static boolean connect(String ip, int port, String database,
             String user, String pass)
     {
@@ -40,7 +50,10 @@ public class Database
         return true;    // This maybe not good idea
     }
     
-    // Disconnect from database server
+    /**
+     * 
+     * Diskonektuj se sa baze podataka.
+    */
     public static void disconnect()
     {
         try
@@ -54,7 +67,12 @@ public class Database
         } catch(SQLException err){}
     }
     
-    // Add client to database
+    /**
+     * 
+     * Dodaje klijenta u bazu podataka
+     * 
+     * @param c klijent
+     */
     public static void addClient(Client c)
     {
         try
@@ -63,7 +81,13 @@ public class Database
         } catch(SQLException err){}
     }
     
-    // Get question
+    /**
+     * 
+     * Uzima redni broj pitanja i vraca pitanje iz baze podataka.
+     * 
+     * @param rb redni broj pitanja
+     * @return Question pitanje
+     */
     public static Question getQuestion(int rb)
     {
         Question question = new Question();

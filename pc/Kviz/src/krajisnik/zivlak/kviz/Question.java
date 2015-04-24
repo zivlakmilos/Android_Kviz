@@ -31,9 +31,8 @@ public class Question
     
     /**
      *
-     * Set Type of question.
-     * Use symbolic constants for arguments.
-     * @param type type of question (symbolic constants)
+     * Postavi tip pitanja.
+     * @param type tip pitanja (simbolicka konstanta)
      */
     public void setType(int type)
     {
@@ -42,9 +41,11 @@ public class Question
     
     /**
      * 
-     * Postavi "vaznost" pitanja.
+     * Postavi "vaznost" pitanja,
+     * da li je pitanje proslo ili nije
+     * @param avalible "vaznost", logicka (true/false)
      */
-    public void setAvalible(boolean abalible)
+    public void setAvalible(boolean avalivle)
     {
         this.avalible = avalible;
     }
