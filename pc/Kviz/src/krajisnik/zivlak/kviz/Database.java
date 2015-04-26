@@ -94,4 +94,10 @@ public class Database
         // Vrati vrednosti, ako nema pitanja vraca 0
         return 0;
     }
+    
+    // Set question avalibility
+    public static void setQuestion(int id, boolean avalibility)
+    {
+        // Code
+    }
 }
