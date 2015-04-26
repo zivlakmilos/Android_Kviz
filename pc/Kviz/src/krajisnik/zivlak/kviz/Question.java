@@ -43,7 +43,7 @@ public class Question
      * 
      * Postavi "vaznost" pitanja,
      * da li je pitanje proslo ili nije
-     * @param avalible "vaznost", logicka (true/false)
+     * @param avalible "vaznost", false(proslo)/ture(nije proslo)
      */
     public void setAvalible(boolean avalivle)
     {

@@ -20,6 +20,13 @@ public class Quiz
     private Random random;
     
     // Constructor
+    /**
+     * 
+     * Kreiraj novi kviz, podesi id i broj pitanja.
+     * 
+     * @param id id kviza
+     * @param numOfQuestions broj pitanja po krugu (broj takmicara)
+     */
     public Quiz(int id, int numOfQuestions)
     {
         this.id = id;
@@ -30,7 +37,7 @@ public class Quiz
         {
 //            int r = random.nextInt(Database.getNumberOfQuestionNow());
 //            question.add(Database.getQuestion(r));
-//            Database.setQuestion(r, false);
+//            Database.setQuestion(r, true);
 //            Database.updateQuestions();
         }
     }

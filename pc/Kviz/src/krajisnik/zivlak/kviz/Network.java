@@ -14,9 +14,9 @@ import java.util.List;
 public class Network
 {
     // Constants
-    public static final int NOTHING = -1;       // Nothing (Default action)
-    public static final int REGISTER = 0;       // Registar players
-    public static final int COMPETITION = 1;    // Start competition
+    public static final int NOTHING = 0;        // Nothing (Default action)
+    public static final int REGISTER = 1;       // Registar players
+    public static final int COMPETITION = 2;    // Start competition
     public static final int RANG = 3;           // Rang list (end competition)
     
     // Network variables
@@ -25,6 +25,7 @@ public class Network
     // Global variables
     private static int clientCount = 0;
     private static int action = NOTHING;
+    
     
     // Add new client to sercer
     public static void addClient(Socket c)
