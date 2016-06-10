@@ -1,6 +1,0 @@
-# view AndroidManifest.xml #generated:10
--keep class krajisnik.zivlak.kviz.MainActivity { <init>(...); }
-
-# view AndroidManifest.xml #generated:17
--keep class krajisnik.zivlak.kviz.Type1 { <init>(...); }
-
