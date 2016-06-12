@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+class QVBoxLayout;
+class QPushButton;
+
 class MainWindow : public QWidget
 {
     Q_OBJECT
@@ -12,6 +15,15 @@ class MainWindow : public QWidget
         ~MainWindow(void);
     
     private:
+        
+        /* Gui: */
+        QVBoxLayout *m_mainLayout;
+        
+        QPushButton *m_btnAndroidProjectorMode;
+        QPushButton *m_btnAndroidMode;
+        QPushButton *m_btnAdministration;
+        
+        void setupGui(void);
 };
 
 #endif // _MAIN_WINDOW_H_
