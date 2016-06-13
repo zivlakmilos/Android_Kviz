@@ -1,6 +1,6 @@
-#include <QtGui>
-
 #include <AdministrationWindow.h>
+
+#include <QtGui>
 
 AdministrationWindow::AdministrationWindow(QWidget* parent)
     : QMainWindow(parent)

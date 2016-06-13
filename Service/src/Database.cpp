@@ -1,6 +1,8 @@
-#include <QSqlDatabase>
-
 #include <Database.h>
+
+#include <QtCore>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 Database::Database(void)
 {
@@ -21,4 +23,16 @@ Database::~Database(void)
 bool Database::open(void)
 {
     return m_db.open();
+}
+
+QList<QString> Database::preuzmiListuFilmova(void)
+{
+    QList<QString> result;
+    QSqlQuery query;
+    query.exec("SELECT * FROM nazivi_kvizova");
+    
+    while(query.next())
+    {
+        result.append(query.value(1).toString());
+    }
 }

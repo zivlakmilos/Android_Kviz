@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+class QAction;
+class QMdiArea;
+
 class AdministrationWindow : public QMainWindow
 {
     public:

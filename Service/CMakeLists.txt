@@ -10,11 +10,14 @@ set(AndroidKviz_SRCS
     main.cpp
     src/MainWindow.cpp
     src/AdministrationWindow.cpp
+    src/DQuizSelector.cpp
     src/Database.cpp
 )
 
 set(AndroidKviz_HEADERS
     include/MainWindow.h
+    include/AdministrationWindow.h
+    include/DQuizSelector.h
 )
 
 foreach(MOCheader ${AndroidKviz_HEADERS})

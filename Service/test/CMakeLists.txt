@@ -11,13 +11,16 @@ include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ../include/)
 INCLUDE(${QT_USE_FILE})
 
 set(AndroidKviz_SRCS
-    ../src/MainWindow.cpp
-    ../src/AdministrationWindow.cpp
-    ../src/Database.cpp
+    src/MainWindow.cpp
+    src/AdministrationWindow.cpp
+    src/DQuizSelector.cpp
+    src/Database.cpp
 )
 
 set(AndroidKviz_HEADERS
-    ../include/MainWindow.h
+    include/MainWindow.h
+    include/AdministrationWindow.h
+    include/DQuizSelector.h
 )
 
 foreach(MOCheader ${AndroidKviz_HEADERS})
