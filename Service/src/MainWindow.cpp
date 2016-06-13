@@ -2,6 +2,8 @@
 
 #include <QtGui>
 
+#include <AdministrationWindow.h>
+
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
@@ -33,8 +35,16 @@ void MainWindow::setupGui(void)
     m_btnAdministration = new QPushButton(this);
     m_btnAdministration->setText(tr("&Administracija"));
     m_btnAdministration->setFont(font);
+    connect(m_btnAdministration, SIGNAL(clicked()),
+            this, SLOT(btnAdministrationClick()));
     
     m_mainLayout->addWidget(m_btnAndroidProjectorMode);
     m_mainLayout->addWidget(m_btnAndroidMode);
     m_mainLayout->addWidget(m_btnAdministration);
+}
+
+void MainWindow::btnAdministrationClick(void)
+{
+    AdministrationWindow *administrationWindow = new AdministrationWindow(this);
+    administrationWindow->show();
 }

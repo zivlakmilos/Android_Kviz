@@ -24,6 +24,9 @@ class MainWindow : public QWidget
         QPushButton *m_btnAdministration;
         
         void setupGui(void);
+        
+    private slots:
+        void btnAdministrationClick(void);
 };
 
 #endif // _MAIN_WINDOW_H_

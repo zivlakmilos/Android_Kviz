@@ -9,6 +9,7 @@ INCLUDE(${QT_USE_FILE})
 set(AndroidKviz_SRCS
     main.cpp
     src/MainWindow.cpp
+    src/AdministrationWindow.cpp
     src/Database.cpp
 )
 
