@@ -9,15 +9,15 @@ class Kviz;
 
 class Database
 { 
-    public:
-        Database(void);
-        ~Database(void);
-        
-        bool open(void);
-        QList<Kviz> preuzmiListuKvizova(void);
-        
-    private:
-        QSqlDatabase m_db;
+public:
+    Database(void);
+    ~Database(void);
+    
+    bool open(void);
+    QList<Kviz> preuzmiListuKvizova(void);
+    
+private:
+    QSqlDatabase m_db;
         
 };
 
