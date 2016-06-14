@@ -19,11 +19,14 @@ void DQuizSelector::setupGui(void)
 {
     Database db;
     
-    m_cbKvizovi = new QComboBox(this);
-    QList<QString> kvizovi;
-    for(int i = 0; i < kvizovi.length(); i++)
+    if(db.open())
     {
-        m_cbKvizovi->addItem(kvizovi.at(i));
+        m_cbKvizovi = new QComboBox(this);
+        QList<QString> kvizovi = db.preuzmiListuKvizova();
+        for(int i = 0; i < kvizovi.length(); i++)
+        {
+            m_cbKvizovi->addItem(kvizovi.at(i));
+        }
     }
     
     m_lblIzborKviza = new QLabel(this);

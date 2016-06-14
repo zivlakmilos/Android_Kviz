@@ -24,10 +24,10 @@ bool Database::open(void)
     return m_db.open();
 }
 
-QList<QString> Database::preuzmiListuFilmova(void)
+QList<QString> Database::preuzmiListuKvizova(void)
 {
     QList<QString> result;
-    QSqlQuery query;
+    QSqlQuery query(m_db);
     query.exec("SELECT naziv FROM nazivi_kvizova");
     
     while(query.next())

@@ -13,7 +13,7 @@ class Database
         ~Database(void);
         
         bool open(void);
-        QList<QString> preuzmiListuFilmova(void);
+        QList<QString> preuzmiListuKvizova(void);
         
     private:
         QSqlDatabase m_db;
