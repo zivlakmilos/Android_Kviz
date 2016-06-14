@@ -9,11 +9,16 @@ class QPushButton;
 class QVBoxLayout;
 class QHBoxLayout;
 
+class Kviz;
+
 class DQuizSelector : public QDialog
 {
     public:
         DQuizSelector(QWidget* parent = 0);
         virtual ~DQuizSelector(void);
+        
+        /* Getters and Setters */
+        QString getSelectedQuizId(void);
         
     private:
         QLabel *m_lblIzborKviza;
@@ -23,6 +28,8 @@ class DQuizSelector : public QDialog
         
         QVBoxLayout *m_mainLayout;
         QHBoxLayout *m_buttonsLayout;
+        
+        QList<Kviz> m_kvizovi;
         
         void setupGui(void);
 };

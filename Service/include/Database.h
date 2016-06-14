@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 
 class QString;
+class Kviz;
 
 class Database
 { 
@@ -13,7 +14,7 @@ class Database
         ~Database(void);
         
         bool open(void);
-        QList<QString> preuzmiListuKvizova(void);
+        QList<Kviz> preuzmiListuKvizova(void);
         
     private:
         QSqlDatabase m_db;

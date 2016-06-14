@@ -4,6 +4,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
+#include <data/kviz.h>
+
 Database::Database(void)
 {
     m_db = QSqlDatabase::addDatabase("QMYSQL");
@@ -24,15 +26,17 @@ bool Database::open(void)
     return m_db.open();
 }
 
-QList<QString> Database::preuzmiListuKvizova(void)
+QList<Kviz> Database::preuzmiListuKvizova(void)
 {
-    QList<QString> result;
+    QList<Kviz> result;
     QSqlQuery query(m_db);
-    query.exec("SELECT naziv FROM nazivi_kvizova");
+    query.exec("SELECT id, naziv FROM nazivi_kvizova");
     
     while(query.next())
     {
-        result.append(query.value(0).toString());
+        int id = query.value(0).toInt();
+        QString naziv = query.value(1).toString();
+        result.append(Kviz(id, naziv));
     }
     
     return result;
