@@ -2,6 +2,8 @@
 
 #include <QtGui>
 
+#include <DQuizSelector.h>
+
 AdministrationWindow::AdministrationWindow(QWidget* parent)
     : QMainWindow(parent)
 {
@@ -11,6 +13,9 @@ AdministrationWindow::AdministrationWindow(QWidget* parent)
     setCentralWidget(m_mdiArea);
     
     setupMenu();
+    
+    DQuizSelector quizSelector;
+    quizSelector.exec();
 }
 
 AdministrationWindow::~AdministrationWindow(void)

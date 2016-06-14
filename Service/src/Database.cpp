@@ -6,7 +6,7 @@
 
 Database::Database(void)
 {
-    m_db = QSqlDatabase::addDatabase("QMYSQL", "android_kviz");
+    m_db = QSqlDatabase::addDatabase("QMYSQL");
     m_db.setHostName("zivlakmilos.ddns.net");
     m_db.setDatabaseName("android_kviz");
     m_db.setUserName("androidkviz");
@@ -17,7 +17,6 @@ Database::~Database(void)
 {
     if(m_db.isOpen())
         m_db.close();
-    QSqlDatabase::removeDatabase("android_kviz");
 }
 
 bool Database::open(void)
@@ -29,10 +28,12 @@ QList<QString> Database::preuzmiListuFilmova(void)
 {
     QList<QString> result;
     QSqlQuery query;
-    query.exec("SELECT * FROM nazivi_kvizova");
+    query.exec("SELECT naziv FROM nazivi_kvizova");
     
     while(query.next())
     {
-        result.append(query.value(1).toString());
+        result.append(query.value(0).toString());
     }
+    
+    return result;
 }
