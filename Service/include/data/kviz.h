@@ -4,7 +4,7 @@
 class Kviz
 {
 public:
-    Kviz(void);
+    Kviz(void) {};
     Kviz(QString naziv) : m_naziv(naziv) {};
     Kviz(int id, QString naziv)
         : m_id(id),

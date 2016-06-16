@@ -10,14 +10,12 @@ set(AndroidKviz_SRCS
     main.cpp
     src/MainWindow.cpp
     src/AdministrationWindow.cpp
-    src/DQuizSelector.cpp
     src/Database.cpp
 )
 
 set(AndroidKviz_HEADERS
     include/MainWindow.h
     include/AdministrationWindow.h
-    include/DQuizSelector.h
 )
 
 foreach(MOCheader ${AndroidKviz_HEADERS})
@@ -30,4 +28,3 @@ target_link_libraries(AndroidKviz ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY}
 target_compile_features(AndroidKviz PRIVATE cxx_range_for)
 
 install(TARGETS AndroidKviz RUNTIME DESTINATION bin)
-add_subdirectory(include/data)

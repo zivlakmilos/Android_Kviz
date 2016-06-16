@@ -3,13 +3,15 @@
 
 #include <QMainWindow>
 
+#include <data/kviz.h>
+
 class QAction;
 class QMdiArea;
 
-class Kviz;
-
 class AdministrationWindow : public QMainWindow
 {
+    Q_OBJECT
+    
 public:
     AdministrationWindow(QWidget* parent = 0);
     virtual ~AdministrationWindow(void);
@@ -18,6 +20,8 @@ private:
     void setupMenu(void);
     void setupToolBar(void);
     void setupStatudBar(void);
+    
+    void setKviz(Kviz kviz);
     
     QMenu *m_menuKviz;
     QMenu *m_menuPomoc;
@@ -31,6 +35,12 @@ private:
     QAction *m_actionOProgramu;
     
     QMdiArea *m_mdiArea;
+    
+    Kviz m_kviz;
+    
+private slots:
+    void actionNoviKviz_click(void);
+    void actionOtvoriKviz_click(void);
 };
 
 #endif // _ADMINISTRATION_WINDOW_H_
