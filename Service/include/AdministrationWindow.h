@@ -26,6 +26,8 @@ private:
     QMenu *m_menuKviz;
     QMenu *m_menuPomoc;
     
+    QToolBar *m_tbPitanja;
+    
     QAction *m_actionNoviKviz;
     QAction *m_actionOtvoriKviz;
     QAction *m_actionIzmenaKvizova;
