@@ -104,3 +104,9 @@ void AdministrationWindow::setKviz(Kviz kviz)
     m_kviz = kviz;
     m_tbPitanja->show();
 }
+
+void AdministrationWindow::closeEvent(QCloseEvent* event)
+{
+    emit close();
+    event->accept();
+}

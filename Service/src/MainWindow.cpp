@@ -47,4 +47,6 @@ void MainWindow::btnAdministrationClick(void)
 {
     AdministrationWindow *administrationWindow = new AdministrationWindow(this);
     administrationWindow->show();
+    connect(administrationWindow, SIGNAL(close()), this, SLOT(show()));
+    hide();
 }

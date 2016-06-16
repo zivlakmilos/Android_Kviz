@@ -40,6 +40,12 @@ private:
     
     Kviz m_kviz;
     
+protected:
+    void closeEvent(QCloseEvent *event);
+    
+signals:
+    void close();
+    
 private slots:
     void actionNoviKviz_click(void);
     void actionOtvoriKviz_click(void);
