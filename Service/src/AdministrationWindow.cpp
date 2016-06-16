@@ -2,6 +2,7 @@
 
 #include <QtGui>
 
+#include <data/kviz.h>
 #include <DQuizSelector.h>
 
 AdministrationWindow::AdministrationWindow(QWidget* parent)
@@ -13,9 +14,6 @@ AdministrationWindow::AdministrationWindow(QWidget* parent)
     setCentralWidget(m_mdiArea);
     
     setupMenu();
-    
-    DQuizSelector quizSelector;
-    quizSelector.exec();
 }
 
 AdministrationWindow::~AdministrationWindow(void)
@@ -24,9 +22,27 @@ AdministrationWindow::~AdministrationWindow(void)
 
 void AdministrationWindow::setupMenu(void)
 {
-    m_actionBrziPrsti = menuBar()->addAction(tr("&Brzi prsti"));
+    /*
+     * Menus
+     */
     
-    m_actionKoZnaZna = menuBar()->addAction(tr("&Ko zna zna"));
+    m_menuKviz = new QMenu(this);
+    m_menuKviz->setTitle(tr("&Kviz"));
+    menuBar()->addMenu(m_menuKviz);
     
-    m_actionAsocijacije = menuBar()->addAction(tr("&Asocijacije"));
+    m_menuPomoc = new QMenu(this);
+    m_menuPomoc->setTitle(tr("&Pomoc"));
+    menuBar()->addMenu(m_menuPomoc);
+    
+    /*
+     * Actions
+     */
+    
+    m_actionNoviKviz = m_menuKviz->addAction(tr("&Novi kviz"));
+    
+    m_actionOtvoriKviz = m_menuKviz->addAction(tr("&Otvori kviz"));
+    
+    m_actionIzmenaKvizova = m_menuKviz->addAction(tr("&Izmena kvizova"));
+    
+    m_actionOProgramu = m_menuPomoc->addAction(tr("&O programu"));
 }

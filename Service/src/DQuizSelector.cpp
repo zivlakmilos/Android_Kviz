@@ -5,8 +5,8 @@
 #include <data/kviz.h>
 #include <Database.h>
 
-DQuizSelector::DQuizSelector(QWidget* parent)
-    : QDialog(parent)
+DQuizSelector::DQuizSelector(QWidget *parent, Qt::WindowFlags f)
+    : QDialog(parent, f)
 {
     setWindowTitle("Android Kviz");
     setupGui();
@@ -59,7 +59,7 @@ void DQuizSelector::setupGui(void)
     setLayout(m_mainLayout);
 }
 
-QString DQuizSelector::getSelectedQuizId(void)
+Kviz DQuizSelector::getSelectedQuiz(void)
 {
     m_kvizovi.at(m_cbKvizovi->currentIndex());
 }

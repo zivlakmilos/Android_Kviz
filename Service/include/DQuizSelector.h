@@ -14,11 +14,11 @@ class Kviz;
 class DQuizSelector : public QDialog
 {
 public:
-    DQuizSelector(QWidget* parent = 0);
+    DQuizSelector(QWidget* parent = 0, Qt::WindowFlags f = 0);
     virtual ~DQuizSelector(void);
     
     /* Getters and Setters */
-    QString getSelectedQuizId(void);
+    Kviz getSelectedQuiz(void);
     
 private:
     QLabel *m_lblIzborKviza;

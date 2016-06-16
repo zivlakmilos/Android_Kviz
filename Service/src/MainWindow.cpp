@@ -3,6 +3,7 @@
 #include <QtGui>
 
 #include <AdministrationWindow.h>
+#include <DQuizSelector.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
