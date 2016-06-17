@@ -57,6 +57,12 @@ void AdministrationWindow::setupMenu(void)
     
     m_actionOProgramu = m_menuPomoc->addAction(tr("&O programu"));
     
+    m_actionBrziPrsti = m_tbPitanja->addAction(tr("Brzi prsti"));
+    m_actionBrziPrsti->setIcon(QIcon(tr(":img/brzi_prsti.jpg")));
+    
+    m_actionKoZnaZna = m_tbPitanja->addAction(tr("Ko zna zna"));
+    m_actionKoZnaZna->setIcon(QIcon(tr(":img/ko_zna_zna.png")));
+    
     m_actionAsocijacije = m_tbPitanja->addAction(tr("Asocijacije"));
     m_actionAsocijacije->setIcon(QIcon(tr(":img/asocijacije.jpg")));
 }
