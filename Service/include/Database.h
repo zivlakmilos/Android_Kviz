@@ -6,6 +6,7 @@
 
 class QString;
 class Kviz;
+class BrziPrsti;
 
 class Database
 { 
@@ -15,6 +16,7 @@ public:
     
     bool open(void);
     QList<Kviz> preuzmiListuKvizova(void);
+    QList<BrziPrsti> preuzmiBrzePrste(int kvizId);
     
 private:
     QSqlDatabase m_db;

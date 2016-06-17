@@ -16,6 +16,10 @@ public:
     QString getNaziv(void) { return m_naziv; };
     void setNaziv(QString naziv) { m_naziv = naziv; };
     
+    enum { KoZnaZna = 1,
+           BrziPrsti,
+           Asocijacije };
+    
 private:
     int m_id;
     QString m_naziv;
