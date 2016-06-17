@@ -11,9 +11,9 @@ public:
           m_naziv(naziv) {};
     ~Kviz(void) {};
     
-    int getId(void) { return m_id; };
+    int getId(void) const { return m_id; };
     
-    QString getNaziv(void) { return m_naziv; };
+    QString getNaziv(void) const { return m_naziv; };
     void setNaziv(QString naziv) { m_naziv = naziv; };
     
     enum { KoZnaZna = 1,

@@ -24,22 +24,22 @@ public:
     
     int getId(void) { return m_id; };
     
-    QString getPitanje(void) { return m_pitanje; };
+    QString getPitanje(void) const { return m_pitanje; };
     void setPitanje(QString pitanje) { m_pitanje = pitanje; };
     
-    QString getA(void) { return m_a; };
+    QString getA(void) const { return m_a; };
     void setA(QString a) { m_a = a; };
     
-    QString getB(void) { return m_b; };
+    QString getB(void) const { return m_b; };
     void setB(QString b) { m_b = b; };
     
-    QString getC(void) { return m_c; };
+    QString getC(void) const { return m_c; };
     void setC(QString c) { m_c = c; };
     
-    QString getD(void) { return m_d; };
+    QString getD(void) const { return m_d; };
     void setD(QString d) { m_d = d; };
     
-    char getOdgovor(void) { return m_odgovor; };
+    char getOdgovor(void) const { return m_odgovor; };
     void setOdgovor(char odgovor) { m_odgovor = odgovor; };
     
 private:

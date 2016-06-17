@@ -14,12 +14,14 @@ set(AndroidKviz_SRCS
     src/AdministrationWindow.cpp
     src/Database.cpp
     src/DBrziPrsti.cpp
+    src/data/MBrziPrsti.cpp
 )
 
 set(AndroidKviz_HEADERS
     include/MainWindow.h
     include/AdministrationWindow.h
     include/DBrziPrsti.h
+    include/data/MBrziPrsti.h
 )
 
 set(AndroidKviz_RESOURCES

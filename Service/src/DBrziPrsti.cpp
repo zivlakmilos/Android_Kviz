@@ -4,25 +4,23 @@
 
 #include <data/kviz.h>
 #include <data/brziprsti.h>
+#include <data/MBrziPrsti.h>
 #include <Database.h>
 
 DBrziPrsti::DBrziPrsti(Kviz *kviz, QWidget *parent)
-    : QTableWidget(parent),
+    : QTableView(parent),
       m_kviz(kviz)
 {
-    /*
-     * TODO: Umesto naziv_kviza stavi stvarni naziv otvorenig kviza
-     */
-    setWindowTitle("Brzi prsti: naziv_kviza");
+    setWindowTitle("Brzi prsti: " + kviz->getNaziv());
     
     Database db;
     if(db.open())
     {
-        QList<BrziPrsti> pitanja = db.preuzmiBrzePrste(m_kviz->getId());
-        for(BrziPrsti pitanje : pitanja)
-        {
-        }
+        m_pitanja = db.preuzmiBrzePrste(m_kviz->getId());
     }
+    
+    m_model = new MBrziPrsti(m_pitanja, this);
+    setModel(m_model);
 }
 
 DBrziPrsti::~DBrziPrsti(void)
