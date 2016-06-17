@@ -4,6 +4,7 @@
 
 #include <data/kviz.h>
 #include <Database.h>
+#include <DBrziPrsti.h>
 
 AdministrationWindow::AdministrationWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -59,6 +60,8 @@ void AdministrationWindow::setupMenu(void)
     
     m_actionBrziPrsti = m_tbPitanja->addAction(tr("Brzi prsti"));
     m_actionBrziPrsti->setIcon(QIcon(tr(":img/brzi_prsti.jpg")));
+    connect(m_actionBrziPrsti, SIGNAL(triggered()),
+            this, SLOT(actionBrziPrsti_click()));
     
     m_actionKoZnaZna = m_tbPitanja->addAction(tr("Ko zna zna"));
     m_actionKoZnaZna->setIcon(QIcon(tr(":img/ko_zna_zna.png")));
@@ -115,4 +118,10 @@ void AdministrationWindow::closeEvent(QCloseEvent* event)
 {
     emit close();
     event->accept();
+}
+
+void AdministrationWindow::actionBrziPrsti_click(void)
+{
+    DBrziPrsti *brziPrsti = new DBrziPrsti;
+    brziPrsti->show();
 }
