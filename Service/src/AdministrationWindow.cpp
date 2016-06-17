@@ -122,6 +122,6 @@ void AdministrationWindow::closeEvent(QCloseEvent* event)
 
 void AdministrationWindow::actionBrziPrsti_click(void)
 {
-    DBrziPrsti *brziPrsti = new DBrziPrsti;
+    DBrziPrsti *brziPrsti = new DBrziPrsti(&m_kviz, this);
     brziPrsti->show();
 }

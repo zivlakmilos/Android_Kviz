@@ -2,11 +2,13 @@
 
 #include <QtGui>
 
+#include <data/kviz.h>
 #include <data/brziprsti.h>
 #include <Database.h>
 
-DBrziPrsti::DBrziPrsti(QWidget *parent)
-    : QTableWidget(parent)
+DBrziPrsti::DBrziPrsti(Kviz *kviz, QWidget *parent)
+    : QTableWidget(parent),
+      m_kviz(kviz)
 {
     /*
      * TODO: Umesto naziv_kviza stavi stvarni naziv otvorenig kviza
@@ -16,7 +18,7 @@ DBrziPrsti::DBrziPrsti(QWidget *parent)
     Database db;
     if(db.open())
     {
-        QList<BrziPrsti> pitanja = db.preuzmiBrzePrste(1);
+        QList<BrziPrsti> pitanja = db.preuzmiBrzePrste(m_kviz->getId());
         for(BrziPrsti pitanje : pitanja)
         {
         }
