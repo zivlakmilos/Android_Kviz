@@ -44,6 +44,9 @@ void AdministrationWindow::setupMenu(void)
     m_tbPitanja = addToolBar(tr("Pitanja"));
     m_tbPitanja->hide();
     
+    m_tbPitanjaDodatni = addToolBar(tr("Pitanja Dodatni"));
+    m_tbPitanjaDodatni->hide();
+    
     /*
      * Actions
      */
@@ -83,6 +86,11 @@ void AdministrationWindow::setupMenu(void)
     m_actionAsocijacije->setIcon(QIcon(tr(":img/asocijacije.jpg")));
     m_actionAsocijacije->setToolTip(tr("Izmena, dodavanja i brisanje asocijacija"));
     m_actionAsocijacije->setStatusTip(tr("Izmena, dodavanje i brisanje asocijacija"));
+    
+    m_actionNovoPitanje = m_tbPitanjaDodatni->addAction(tr("Novo pitanje"));
+    m_actionNovoPitanje->setIcon(QIcon(tr(":img/new_question")));
+    m_actionNovoPitanje->setToolTip(tr("Kreiranje novog pitanja"));
+    m_actionNovoPitanje->setStatusTip(tr("Kreiranje novog pitanja"));
 }
 
 void AdministrationWindow::setupStatusBar(void)
@@ -147,4 +155,5 @@ void AdministrationWindow::actionBrziPrsti_click(void)
     
     m_actionBrziPrsti->setEnabled(false);
     subWindow->show();
+    m_tbPitanjaDodatni->show();
 }

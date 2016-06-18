@@ -7,6 +7,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
+    setWindowTitle(tr("Android Kviz"));
+    
     setupGui();
 }
 
@@ -16,8 +18,6 @@ MainWindow::~MainWindow(void)
 
 void MainWindow::setupGui(void)
 {
-    setWindowTitle(tr("Android Kviz"));
-    
     m_mainLayout = new QVBoxLayout(this);
     setLayout(m_mainLayout);
     

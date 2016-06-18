@@ -15,6 +15,7 @@ set(AndroidKviz_SRCS
     src/Database.cpp
     src/DBrziPrsti.cpp
     src/data/MBrziPrsti.cpp
+    src/DBrziPrstiEdit.cpp
 )
 
 set(AndroidKviz_HEADERS
@@ -22,6 +23,7 @@ set(AndroidKviz_HEADERS
     include/AdministrationWindow.h
     include/DBrziPrsti.h
     include/data/MBrziPrsti.h
+    include/DBrziPrstiEdit.h
 )
 
 set(AndroidKviz_RESOURCES

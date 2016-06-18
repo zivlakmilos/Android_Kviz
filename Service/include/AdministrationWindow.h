@@ -27,6 +27,7 @@ private:
     QMenu *m_menuPomoc;
     
     QToolBar *m_tbPitanja;
+    QToolBar *m_tbPitanjaDodatni;
     
     QAction *m_actionNoviKviz;
     QAction *m_actionOtvoriKviz;
@@ -35,6 +36,7 @@ private:
     QAction *m_actionKoZnaZna;
     QAction *m_actionAsocijacije;
     QAction *m_actionOProgramu;
+    QAction *m_actionNovoPitanje;
     
     QMdiArea *m_mdiArea;
     
