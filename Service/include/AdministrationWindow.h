@@ -19,7 +19,7 @@ public:
 private:
     void setupMenu(void);
     void setupToolBar(void);
-    void setupStatudBar(void);
+    void setupStatusBar(void);
     
     void setKviz(Kviz kviz);
     

@@ -15,6 +15,7 @@ AdministrationWindow::AdministrationWindow(QWidget* parent)
     setCentralWidget(m_mdiArea);
     
     setupMenu();
+    setupStatusBar();
 }
 
 AdministrationWindow::~AdministrationWindow(void)
@@ -33,6 +34,7 @@ void AdministrationWindow::setupMenu(void)
     
     m_menuPomoc = new QMenu(this);
     m_menuPomoc->setTitle(tr("&Pomoc"));
+    m_menuPomoc->setIcon(QIcon(tr(":img/help.png")));
     menuBar()->addMenu(m_menuPomoc);
     
     /*
@@ -47,27 +49,45 @@ void AdministrationWindow::setupMenu(void)
      */
     
     m_actionNoviKviz = m_menuKviz->addAction(tr("&Novi kviz"));
+    m_actionNoviKviz->setIcon(QIcon(tr(":img/new_kviz.png")));
+    m_actionNoviKviz->setToolTip(tr("Kreiranje novog kviza"));
+    m_actionNoviKviz->setStatusTip(tr("Kreiranje novok kviza"));
     connect(m_actionNoviKviz, SIGNAL(triggered()),
             this, SLOT(actionNoviKviz_click()));
     
     m_actionOtvoriKviz = m_menuKviz->addAction(tr("&Otvori kviz"));
+    m_actionOtvoriKviz->setToolTip(tr("Otvaranje kviza za administraciju"));
+    m_actionOtvoriKviz->setStatusTip(tr("Otvaranje kviza za administraciju"));
     connect(m_actionOtvoriKviz, SIGNAL(triggered()),
             this, SLOT(actionOtvoriKviz_click()));
     
     m_actionIzmenaKvizova = m_menuKviz->addAction(tr("&Izmena kvizova"));
+    m_actionIzmenaKvizova->setToolTip(tr("Izmena i brisanje kvizova"));
+    m_actionIzmenaKvizova->setStatusTip(tr("Izmena i brisanje kvizova"));
     
     m_actionOProgramu = m_menuPomoc->addAction(tr("&O programu"));
     
     m_actionBrziPrsti = m_tbPitanja->addAction(tr("Brzi prsti"));
     m_actionBrziPrsti->setIcon(QIcon(tr(":img/brzi_prsti.jpg")));
+    m_actionBrziPrsti->setToolTip(tr("Izmena, dodavanje i brisanje pitanja za brze prste"));
+    m_actionBrziPrsti->setStatusTip(tr("Izmena, dodavanje i brisanje pitanja za brze prste"));
     connect(m_actionBrziPrsti, SIGNAL(triggered()),
             this, SLOT(actionBrziPrsti_click()));
     
     m_actionKoZnaZna = m_tbPitanja->addAction(tr("Ko zna zna"));
     m_actionKoZnaZna->setIcon(QIcon(tr(":img/ko_zna_zna.png")));
+    m_actionKoZnaZna->setToolTip(tr("Izmena, dodatavanje i brisanje pitanja za ko zna zna"));
+    m_actionKoZnaZna->setStatusTip(tr("Izmena, dodatavanje i brisanje pitanja za ko zna zna"));
     
     m_actionAsocijacije = m_tbPitanja->addAction(tr("Asocijacije"));
     m_actionAsocijacije->setIcon(QIcon(tr(":img/asocijacije.jpg")));
+    m_actionAsocijacije->setToolTip(tr("Izmena, dodavanja i brisanje asocijacija"));
+    m_actionAsocijacije->setStatusTip(tr("Izmena, dodavanje i brisanje asocijacija"));
+}
+
+void AdministrationWindow::setupStatusBar(void)
+{
+    statusBar();
 }
 
 void AdministrationWindow::actionNoviKviz_click(void)

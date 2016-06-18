@@ -4,5 +4,9 @@
         <file>img/asocijacije.jpg</file>
         <file>img/brzi_prsti.jpg</file>
         <file>img/ko_zna_zna.png</file>
+        <file>img/new_kviz.png</file>
+        <file>img/new_question.png</file>
+        <file>img/search.png</file>
+        <file>img/help.png</file>
     </qresource>
 </RCC>
