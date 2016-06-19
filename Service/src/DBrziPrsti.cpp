@@ -36,3 +36,10 @@ void DBrziPrsti::doubleClicked(QModelIndex index)
     DBrziPrstiEdit brziPrstiEditor(&m_pitanja[index.row()], this);
     brziPrstiEditor.exec();
 }
+
+void DBrziPrsti::novoPitanje(void)
+{
+    BrziPrsti pitanje;
+    DBrziPrstiEdit brziPrstiEditor(&pitanje, this);
+    brziPrstiEditor.exec();
+}

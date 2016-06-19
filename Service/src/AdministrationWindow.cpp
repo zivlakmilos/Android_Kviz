@@ -91,6 +91,8 @@ void AdministrationWindow::setupMenu(void)
     m_actionNovoPitanje->setIcon(QIcon(tr(":img/new_question")));
     m_actionNovoPitanje->setToolTip(tr("Kreiranje novog pitanja"));
     m_actionNovoPitanje->setStatusTip(tr("Kreiranje novog pitanja"));
+    connect(m_actionNovoPitanje, SIGNAL(triggered()),
+            this, SLOT(actionNovoPitanje_click()));
 }
 
 void AdministrationWindow::setupStatusBar(void)
@@ -156,4 +158,14 @@ void AdministrationWindow::actionBrziPrsti_click(void)
     m_actionBrziPrsti->setEnabled(false);
     subWindow->show();
     m_tbPitanjaDodatni->show();
+}
+
+void AdministrationWindow::actionNovoPitanje_click(void)
+{
+    QMdiSubWindow *activeWindow = m_mdiArea->activeSubWindow();
+    
+    if(DBrziPrsti *brziPrsti = qobject_cast<DBrziPrsti*>(activeWindow->widget()))
+    {
+        brziPrsti->novoPitanje();
+    }
 }

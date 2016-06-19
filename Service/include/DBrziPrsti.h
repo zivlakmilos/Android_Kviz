@@ -15,6 +15,8 @@ public:
     DBrziPrsti(Kviz *kviz, QWidget *parent = 0);
     virtual ~DBrziPrsti(void);
     
+    void novoPitanje(void);
+    
 private:
     Kviz *m_kviz;
     QList<BrziPrsti> m_pitanja;

@@ -52,6 +52,7 @@ private slots:
     void actionNoviKviz_click(void);
     void actionOtvoriKviz_click(void);
     void actionBrziPrsti_click(void);
+    void actionNovoPitanje_click(void);
 };
 
 #endif // _ADMINISTRATION_WINDOW_H_
