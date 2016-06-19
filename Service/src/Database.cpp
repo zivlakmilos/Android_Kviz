@@ -64,7 +64,7 @@ QList<BrziPrsti> Database::preuzmiBrzePrste(int kvizId)
         QString b = query.value(3).toString();
         QString c = query.value(4).toString();
         QString d = query.value(5).toString();
-        char odgovor = query.value(6).toChar().toAscii();
+        QChar odgovor = query.value(6).toString()[0];
         result.append(BrziPrsti(id, pitanje, a, b, c, d, odgovor));
     }
     

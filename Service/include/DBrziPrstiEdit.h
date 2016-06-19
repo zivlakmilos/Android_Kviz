@@ -8,6 +8,7 @@ class QHBoxLayout;
 class QLabel;
 class QLineEdit;
 class QComboBox;
+class QPushButton;
 
 class BrziPrsti;
 
@@ -24,6 +25,7 @@ private:
     
     QVBoxLayout *m_layoutMain;
     QHBoxLayout *m_layoutOdgovor;
+    QHBoxLayout *m_layoutButtons;
     
     QLabel *m_lblPitanje;
     QLineEdit *m_txtPitanje;
@@ -37,6 +39,8 @@ private:
     QLineEdit *m_txtD;
     QLabel *m_lblOdgovor;
     QComboBox *m_cbOdgovor;
+    QPushButton *m_btnOk;
+    QPushButton *m_btnCancel;
     
     BrziPrsti *m_pitanje;
 };
