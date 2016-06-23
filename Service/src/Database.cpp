@@ -51,7 +51,7 @@ QList<BrziPrsti> Database::preuzmiBrzePrste(int kvizId)
     query.prepare("SELECT bp.id, bp.pitanje, bp.a, bp.b, bp.c, bp.d, bp.odgovor "
                   "FROM brzi_prsti bp "
                   "LEFT JOIN kviz_pitanja p ON bp.id = p.pitanje_id "
-                  "WHERE p.kviz_id = 1 AND p.tip = :tip;");
+                  "WHERE p.kviz_id = 1 AND p.tip = :tip");
     query.bindValue(":kviz_id", kvizId);
     query.bindValue(":tip", Kviz::BrziPrsti);
     query.exec();
@@ -69,4 +69,45 @@ QList<BrziPrsti> Database::preuzmiBrzePrste(int kvizId)
     }
     
     return result;
+}
+
+void Database::snimiBrzePrste(BrziPrsti brziPrsti, int kvizId)
+{
+    QSqlQuery query(m_db);
+    QString upit;
+    
+    if(brziPrsti.getId() < 0)
+    {
+        query.prepare("INSERT INTO brzi_prsti (pitanje, a, b, c, d, odgovor)"
+                      "VALUES (:pitanje, :a, :b, :c, :d, :odgovor)");
+        query.bindValue(":pitanje", brziPrsti.getPitanje());
+        query.bindValue(":a", brziPrsti.getA());
+        query.bindValue(":b", brziPrsti.getB());
+        query.bindValue(":c", brziPrsti.getC());
+        query.bindValue(":d", brziPrsti.getD());
+        query.bindValue(":odgobor", brziPrsti.getOdgovor());
+        query.exec();
+        
+        query.prepare("INSERT INTO kviz_pitanja (tip, kviz_id, pitanje_id)"
+                      "VALUES (:tip, :kviz_id, :pitanje_id)");
+        query.bindValue(":tip", Kviz::BrziPrsti);
+        query.bindValue(":kvi_id", kvizId);
+        query.bindValue(":odgovor", brziPrsti.getOdgovor());
+        query.exec();
+    } else
+    {
+        query.prepare("UPDATE brzi_prsti SET"
+                      "pitanje = :pitanje,"
+                      "a :a, b=:b, c=:c, d=:d,"
+                      "odgovor=:odgovor"
+                      "WHERE id=:id");
+        query.bindValue(":id", brziPrsti.getId());
+        query.bindValue(":pitanje", brziPrsti.getPitanje());
+        query.bindValue(":a", brziPrsti.getA());
+        query.bindValue(":b", brziPrsti.getB());
+        query.bindValue(":c", brziPrsti.getC());
+        query.bindValue(":d", brziPrsti.getD());
+        query.bindValue(":odgobor", brziPrsti.getOdgovor());
+        query.exec();
+    }
 }

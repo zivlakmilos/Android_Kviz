@@ -18,6 +18,8 @@ public:
     QList<Kviz> preuzmiListuKvizova(void);
     QList<BrziPrsti> preuzmiBrzePrste(int kvizId);
     
+    void snimiBrzePrste(BrziPrsti brziPrsti, int kvizId = -1);
+    
 private:
     QSqlDatabase m_db;
         
