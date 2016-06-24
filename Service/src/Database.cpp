@@ -72,7 +72,7 @@ QList<BrziPrsti> Database::preuzmiBrzePrste(int kvizId)
     return result;
 }
 
-void Database::snimiBrzePrste(BrziPrsti brziPrsti, int kvizId)
+BrziPrsti Database::snimiBrzePrste(BrziPrsti brziPrsti, int kvizId)
 {
     QSqlQuery query(m_db);
     
@@ -89,11 +89,12 @@ void Database::snimiBrzePrste(BrziPrsti brziPrsti, int kvizId)
         query.bindValue(":odgovor", brziPrsti.getOdgovor());
         query.exec();
         
+        brziPrsti.setId(query.lastInsertId().toInt());
+        
         query.prepare("INSERT INTO kviz_pitanja (tip, kviz_id, pitanje_id) "
-                      "VALUES (:tip, :kviz_id, :pitanje_id)");
+                      "VALUES (:tip, :kviz_id, LAST_INSERT_ID())");
         query.bindValue(":tip", Kviz::BrziPrsti);
         query.bindValue(":kvi_id", kvizId);
-        query.bindValue(":odgovor", brziPrsti.getOdgovor());
         query.exec();
         m_db.commit();
     } else
@@ -112,4 +113,6 @@ void Database::snimiBrzePrste(BrziPrsti brziPrsti, int kvizId)
         query.bindValue(":odgovor", brziPrsti.getOdgovor());
         query.exec();
     }
+    
+    return brziPrsti;
 }

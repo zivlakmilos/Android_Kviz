@@ -25,6 +25,7 @@ public:
     virtual ~BrziPrsti(void) {};
     
     int getId(void) { return m_id; };
+    void setId(int id) { if(m_id < 0) m_id = id; };
     
     QString getPitanje(void) const { return m_pitanje; };
     void setPitanje(QString pitanje) { m_pitanje = pitanje; };

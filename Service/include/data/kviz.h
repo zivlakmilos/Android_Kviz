@@ -15,6 +15,7 @@ public:
     ~Kviz(void) {};
     
     int getId(void) const { return m_id; };
+    void setId(int id) { if(m_id < 0) m_id = id; };
     
     QString getNaziv(void) const { return m_naziv; };
     void setNaziv(QString naziv) { m_naziv = naziv; };

@@ -20,7 +20,7 @@ public:
     void novoPitanje(void);
     
 private:
-    void snimiBrzePrste(BrziPrsti brziPrsti);
+    BrziPrsti snimiBrzePrste(BrziPrsti brziPrsti);
     
     Kviz *m_kviz;
     QList<BrziPrsti> m_pitanja;

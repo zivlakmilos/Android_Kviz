@@ -63,7 +63,7 @@ QVariant MBrziPrsti::headerData(int section, Qt::Orientation orientation, int ro
             }
         } else
         {
-            return section;
+            return section + 1;
         }
     }
     

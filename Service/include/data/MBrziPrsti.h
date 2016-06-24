@@ -3,7 +3,7 @@
 
 #include <QAbstractTableModel>
 
-class BrziPrsti;
+#include <data/brziprsti.h>
 
 class MBrziPrsti : public QAbstractTableModel
 {
@@ -16,6 +16,9 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    
+    void dataChanged(int index, BrziPrsti data) { m_data[index] = data; };
+    void addData(BrziPrsti data) { m_data.append(data); };
     
 private:
     QVariant podatakZaPrikaz(int column, int row) const;

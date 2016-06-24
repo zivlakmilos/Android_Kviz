@@ -37,6 +37,7 @@ void DBrziPrsti::doubleClicked(QModelIndex index)
     if(brziPrstiEditor.exec() == QDialog::Accepted)
     {
         snimiBrzePrste(brziPrstiEditor.getPitanje());
+        m_model->dataChanged(index.row(), brziPrstiEditor.getPitanje());
     }
 }
 
@@ -46,15 +47,16 @@ void DBrziPrsti::novoPitanje(void)
     DBrziPrstiEdit brziPrstiEditor(&pitanje, this);
     if(brziPrstiEditor.exec() == QDialog::Accepted)
     {
-        snimiBrzePrste(brziPrstiEditor.getPitanje());
+        pitanje = snimiBrzePrste(brziPrstiEditor.getPitanje());
+        m_model->addData(pitanje);
     }
 }
 
-void DBrziPrsti::snimiBrzePrste(BrziPrsti brziPrsti)
+BrziPrsti DBrziPrsti::snimiBrzePrste(BrziPrsti brziPrsti)
 {
     Database db;
     if(db.open())
     {
-        db.snimiBrzePrste(brziPrsti);
+        return db.snimiBrzePrste(brziPrsti, m_kviz->getId());
     }
 }
