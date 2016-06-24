@@ -34,12 +34,27 @@ DBrziPrsti::~DBrziPrsti(void)
 void DBrziPrsti::doubleClicked(QModelIndex index)
 {
     DBrziPrstiEdit brziPrstiEditor(&m_pitanja[index.row()], this);
-    brziPrstiEditor.exec();
+    if(brziPrstiEditor.exec() == QDialog::Accepted)
+    {
+        snimiBrzePrste(brziPrstiEditor.getPitanje());
+    }
 }
 
 void DBrziPrsti::novoPitanje(void)
 {
     BrziPrsti pitanje;
     DBrziPrstiEdit brziPrstiEditor(&pitanje, this);
-    brziPrstiEditor.exec();
+    if(brziPrstiEditor.exec() == QDialog::Accepted)
+    {
+        snimiBrzePrste(brziPrstiEditor.getPitanje());
+    }
+}
+
+void DBrziPrsti::snimiBrzePrste(BrziPrsti brziPrsti)
+{
+    Database db;
+    if(db.open())
+    {
+        db.snimiBrzePrste(brziPrsti);
+    }
 }

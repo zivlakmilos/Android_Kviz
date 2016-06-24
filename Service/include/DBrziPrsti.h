@@ -3,9 +3,11 @@
 
 #include <QTableView>
 
+#include <data/brziprsti.h>
+
 class Kviz;
-class BrziPrsti;
 class MBrziPrsti;
+class DBrziPrstiEdit;
 
 class DBrziPrsti : public QTableView
 {
@@ -18,6 +20,8 @@ public:
     void novoPitanje(void);
     
 private:
+    void snimiBrzePrste(BrziPrsti brziPrsti);
+    
     Kviz *m_kviz;
     QList<BrziPrsti> m_pitanja;
     MBrziPrsti *m_model;

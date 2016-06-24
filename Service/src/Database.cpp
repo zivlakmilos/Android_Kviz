@@ -3,6 +3,7 @@
 #include <QtCore>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlError>
 
 #include <data/kviz.h>
 #include <data/brziprsti.h>
@@ -74,32 +75,33 @@ QList<BrziPrsti> Database::preuzmiBrzePrste(int kvizId)
 void Database::snimiBrzePrste(BrziPrsti brziPrsti, int kvizId)
 {
     QSqlQuery query(m_db);
-    QString upit;
     
     if(brziPrsti.getId() < 0)
     {
-        query.prepare("INSERT INTO brzi_prsti (pitanje, a, b, c, d, odgovor)"
+        m_db.transaction();
+        query.prepare("INSERT INTO brzi_prsti (pitanje, a, b, c, d, odgovor) "
                       "VALUES (:pitanje, :a, :b, :c, :d, :odgovor)");
         query.bindValue(":pitanje", brziPrsti.getPitanje());
         query.bindValue(":a", brziPrsti.getA());
         query.bindValue(":b", brziPrsti.getB());
         query.bindValue(":c", brziPrsti.getC());
         query.bindValue(":d", brziPrsti.getD());
-        query.bindValue(":odgobor", brziPrsti.getOdgovor());
+        query.bindValue(":odgovor", brziPrsti.getOdgovor());
         query.exec();
         
-        query.prepare("INSERT INTO kviz_pitanja (tip, kviz_id, pitanje_id)"
+        query.prepare("INSERT INTO kviz_pitanja (tip, kviz_id, pitanje_id) "
                       "VALUES (:tip, :kviz_id, :pitanje_id)");
         query.bindValue(":tip", Kviz::BrziPrsti);
         query.bindValue(":kvi_id", kvizId);
         query.bindValue(":odgovor", brziPrsti.getOdgovor());
         query.exec();
+        m_db.commit();
     } else
     {
-        query.prepare("UPDATE brzi_prsti SET"
-                      "pitanje = :pitanje,"
-                      "a :a, b=:b, c=:c, d=:d,"
-                      "odgovor=:odgovor"
+        query.prepare("UPDATE brzi_prsti SET "
+                      "pitanje=:pitanje, "
+                      "a=:a, b=:b, c=:c, d=:d, "
+                      "odgovor=:odgovor "
                       "WHERE id=:id");
         query.bindValue(":id", brziPrsti.getId());
         query.bindValue(":pitanje", brziPrsti.getPitanje());
@@ -107,7 +109,7 @@ void Database::snimiBrzePrste(BrziPrsti brziPrsti, int kvizId)
         query.bindValue(":b", brziPrsti.getB());
         query.bindValue(":c", brziPrsti.getC());
         query.bindValue(":d", brziPrsti.getD());
-        query.bindValue(":odgobor", brziPrsti.getOdgovor());
+        query.bindValue(":odgovor", brziPrsti.getOdgovor());
         query.exec();
     }
 }

@@ -77,4 +77,16 @@ void DBrziPrstiEdit::setupGui(void)
     m_layoutMain->addWidget(m_txtD);
     m_layoutMain->addLayout(m_layoutOdgovor);
     m_layoutMain->addLayout(m_layoutButtons);
+    
+    connect(this, SIGNAL(accepted()), this, SLOT(prihvati()));
+}
+
+void DBrziPrstiEdit::prihvati(void)
+{
+    m_pitanje->setPitanje(m_txtPitanje->text());
+    m_pitanje->setA(m_txtA->text());
+    m_pitanje->setB(m_txtB->text());
+    m_pitanje->setC(m_txtC->text());
+    m_pitanje->setD(m_txtD->text());
+    m_pitanje->setOdgovor(m_cbOdgovor->currentText().at(0));
 }

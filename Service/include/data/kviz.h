@@ -4,8 +4,11 @@
 class Kviz
 {
 public:
-    Kviz(void) {};
-    Kviz(QString naziv) : m_naziv(naziv) {};
+    Kviz(void)
+        : m_id(-1) {};
+    Kviz(QString naziv)
+        : m_id(-1),
+          m_naziv(naziv) {};
     Kviz(int id, QString naziv)
         : m_id(id),
           m_naziv(naziv) {};

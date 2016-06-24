@@ -4,7 +4,8 @@
 class BrziPrsti
 {
 public:
-    BrziPrsti(void) {};
+    BrziPrsti(void)
+        : m_id(-1) {};
     BrziPrsti(int id, QString pitanje, QString a, QString b, QString c, QString d, QChar odgovor)
         : m_id(id),
           m_pitanje(pitanje),
@@ -14,7 +15,8 @@ public:
           m_d(d),
           m_odgovor(odgovor) {};
     BrziPrsti(QString pitanje, QString a, QString b, QString c, QString d, QChar odgovor)
-        : m_pitanje(pitanje),
+        : m_id(-1),
+          m_pitanje(pitanje),
           m_a(a),
           m_b(b),
           m_c(c),
@@ -40,7 +42,7 @@ public:
     void setD(QString d) { m_d = d; };
     
     QChar getOdgovor(void) const { return m_odgovor; };
-    void setOdgovor(char odgovor) { m_odgovor = odgovor; };
+    void setOdgovor(QChar odgovor) { m_odgovor = odgovor; };
     
 private:
     int m_id;

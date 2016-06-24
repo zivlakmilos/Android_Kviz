@@ -3,14 +3,14 @@
 
 #include <QDialog>
 
+#include <data/brziprsti.h>
+
 class QVBoxLayout;
 class QHBoxLayout;
 class QLabel;
 class QLineEdit;
 class QComboBox;
 class QPushButton;
-
-class BrziPrsti;
 
 class DBrziPrstiEdit : public QDialog
 {
@@ -19,6 +19,8 @@ class DBrziPrstiEdit : public QDialog
 public:
     DBrziPrstiEdit(BrziPrsti *pitanje, QWidget* parent = 0);
     virtual ~DBrziPrstiEdit(void);
+    
+    BrziPrsti getPitanje(void) { return *m_pitanje; };
     
 private:
     void setupGui(void);
@@ -43,6 +45,9 @@ private:
     QPushButton *m_btnCancel;
     
     BrziPrsti *m_pitanje;
+    
+private slots:
+    void prihvati(void);
 };
 
 #endif // _D_BRZI_PRSTI_EDIT_H_
