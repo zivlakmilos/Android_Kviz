@@ -78,7 +78,6 @@ BrziPrsti Database::snimiBrzePrste(BrziPrsti brziPrsti, int kvizId)
     
     if(brziPrsti.getId() < 0)
     {
-        m_db.transaction();
         query.prepare("INSERT INTO brzi_prsti (pitanje, a, b, c, d, odgovor) "
                       "VALUES (:pitanje, :a, :b, :c, :d, :odgovor)");
         query.bindValue(":pitanje", brziPrsti.getPitanje());
@@ -96,7 +95,6 @@ BrziPrsti Database::snimiBrzePrste(BrziPrsti brziPrsti, int kvizId)
         query.bindValue(":tip", Kviz::BrziPrsti);
         query.bindValue(":kvi_id", kvizId);
         query.exec();
-        m_db.commit();
     } else
     {
         query.prepare("UPDATE brzi_prsti SET "
