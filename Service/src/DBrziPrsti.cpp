@@ -37,7 +37,7 @@ void DBrziPrsti::doubleClicked(QModelIndex index)
     if(brziPrstiEditor.exec() == QDialog::Accepted)
     {
         snimiBrzePrste(brziPrstiEditor.getPitanje());
-        m_model->dataChanged(index.row(), brziPrstiEditor.getPitanje());
+        m_model->dataChange(index.row(), brziPrstiEditor.getPitanje());
     }
 }
 
