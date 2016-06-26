@@ -13,6 +13,8 @@ AdministrationWindow::AdministrationWindow(QWidget* parent)
     
     m_mdiArea = new QMdiArea(this);
     setCentralWidget(m_mdiArea);
+    connect(m_mdiArea, SIGNAL(subWindowActivated(QMdiSubWindow*)),
+            this, SLOT(subWindowsActiveChanged(QMdiSubWindow*)));
     
     setupMenu();
     setupStatusBar();
@@ -144,7 +146,7 @@ void AdministrationWindow::setKviz(Kviz kviz)
     m_tbPitanja->show();
 }
 
-void AdministrationWindow::closeEvent(QCloseEvent* event)
+void AdministrationWindow::closeEvent(QCloseEvent *event)
 {
     emit close();
     event->accept();
@@ -157,7 +159,9 @@ void AdministrationWindow::actionBrziPrsti_click(void)
     
     m_actionBrziPrsti->setEnabled(false);
     subWindow->show();
-    m_tbPitanjaDodatni->show();
+    
+    connect(brziPrsti, SIGNAL(close(bool)),
+            m_actionBrziPrsti, SLOT(setEnabled(bool)));
 }
 
 void AdministrationWindow::actionNovoPitanje_click(void)
@@ -167,5 +171,16 @@ void AdministrationWindow::actionNovoPitanje_click(void)
     if(DBrziPrsti *brziPrsti = qobject_cast<DBrziPrsti*>(activeWindow->widget()))
     {
         brziPrsti->novoPitanje();
+    }
+}
+
+void AdministrationWindow::subWindowsActiveChanged(QMdiSubWindow* activeWindow)
+{
+    if(!activeWindow)
+    {
+        m_tbPitanjaDodatni->hide();
+    } else
+    {
+        m_tbPitanjaDodatni->show();
     }
 }

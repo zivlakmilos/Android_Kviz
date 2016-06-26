@@ -7,6 +7,7 @@
 
 class QAction;
 class QMdiArea;
+class QMdiSubWindow;
 
 class AdministrationWindow : public QMainWindow
 {
@@ -18,7 +19,6 @@ public:
     
 private:
     void setupMenu(void);
-    void setupToolBar(void);
     void setupStatusBar(void);
     
     void setKviz(Kviz kviz);
@@ -53,6 +53,7 @@ private slots:
     void actionOtvoriKviz_click(void);
     void actionBrziPrsti_click(void);
     void actionNovoPitanje_click(void);
+    void subWindowsActiveChanged(QMdiSubWindow *activeWindow);
 };
 
 #endif // _ADMINISTRATION_WINDOW_H_

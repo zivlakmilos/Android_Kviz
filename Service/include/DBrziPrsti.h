@@ -26,8 +26,14 @@ private:
     QList<BrziPrsti> m_pitanja;
     MBrziPrsti *m_model;
     
+protected:
+    void closeEvent(QCloseEvent *event);
+    
 private slots:
     void doubleClicked(QModelIndex index);
+    
+signals:
+    void close(bool);
 };
 
 #endif // _D_BRZI_PRSTI_H_

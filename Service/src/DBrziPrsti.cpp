@@ -60,3 +60,9 @@ BrziPrsti DBrziPrsti::snimiBrzePrste(BrziPrsti brziPrsti)
         return db.snimiBrzePrste(brziPrsti, m_kviz->getId());
     }
 }
+
+void DBrziPrsti::closeEvent(QCloseEvent *event)
+{
+    emit close(true);
+    event->accept();
+}
