@@ -157,6 +157,8 @@ void AdministrationWindow::actionBrziPrsti_click(void)
     DBrziPrsti *brziPrsti = new DBrziPrsti(&m_kviz, this);
     QMdiSubWindow *subWindow = m_mdiArea->addSubWindow(brziPrsti);
     
+    brziPrsti->addAction(m_actionNovoPitanje);
+    
     m_actionBrziPrsti->setEnabled(false);
     subWindow->show();
     

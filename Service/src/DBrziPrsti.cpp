@@ -25,6 +25,11 @@ DBrziPrsti::DBrziPrsti(Kviz *kviz, QWidget *parent)
     
     connect(this, SIGNAL(doubleClicked(QModelIndex)),
             this, SLOT(doubleClicked(QModelIndex)));
+ 
+    m_popupKviz = new QMenu(this);
+    setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)),
+            this, SLOT(customMenuRequest(QPoint)));
 }
 
 DBrziPrsti::~DBrziPrsti(void)
@@ -65,4 +70,15 @@ void DBrziPrsti::closeEvent(QCloseEvent *event)
 {
     emit close(true);
     event->accept();
+}
+
+void DBrziPrsti::addAction(QAction *action)
+{
+    m_popupKviz->addAction(action);
+}
+
+void DBrziPrsti::customMenuRequest(QPoint pos)
+{
+    QModelIndex index = indexAt(pos);
+    m_popupKviz->popup(this->viewport()->mapToGlobal(pos));
 }

@@ -5,6 +5,9 @@
 
 #include <data/brziprsti.h>
 
+class QMenu;
+class QAction;
+
 class Kviz;
 class MBrziPrsti;
 class DBrziPrstiEdit;
@@ -18,6 +21,7 @@ public:
     virtual ~DBrziPrsti(void);
     
     void novoPitanje(void);
+    void addAction(QAction *action);
     
 private:
     BrziPrsti snimiBrzePrste(BrziPrsti brziPrsti);
@@ -26,11 +30,14 @@ private:
     QList<BrziPrsti> m_pitanja;
     MBrziPrsti *m_model;
     
+    QMenu *m_popupKviz;
+    
 protected:
     void closeEvent(QCloseEvent *event);
     
 private slots:
     void doubleClicked(QModelIndex index);
+    void customMenuRequest(QPoint pos);
     
 signals:
     void close(bool);
