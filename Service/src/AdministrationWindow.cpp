@@ -95,6 +95,13 @@ void AdministrationWindow::setupMenu(void)
     m_actionNovoPitanje->setStatusTip(tr("Kreiranje novog pitanja"));
     connect(m_actionNovoPitanje, SIGNAL(triggered()),
             this, SLOT(actionNovoPitanje_click()));
+    
+    m_actionObrisiPitanje = m_tbPitanjaDodatni->addAction(tr("Obrisi pitanje"));
+    m_actionObrisiPitanje->setIcon(QIcon(tr(":img/delete_question")));
+    m_actionObrisiPitanje->setToolTip(tr("Brisanje selektovanog pitanja"));
+    m_actionObrisiPitanje->setStatusTip(tr("Brisanje selektovanog pitanja"));
+    connect(m_actionObrisiPitanje, SIGNAL(triggered()),
+            this, SLOT(actionObrisiPitanje_click()));
 }
 
 void AdministrationWindow::setupStatusBar(void)
@@ -158,6 +165,7 @@ void AdministrationWindow::actionBrziPrsti_click(void)
     QMdiSubWindow *subWindow = m_mdiArea->addSubWindow(brziPrsti);
     
     brziPrsti->addAction(m_actionNovoPitanje);
+    brziPrsti->addAction(m_actionObrisiPitanje);
     
     m_actionBrziPrsti->setEnabled(false);
     subWindow->show();
@@ -173,6 +181,16 @@ void AdministrationWindow::actionNovoPitanje_click(void)
     if(DBrziPrsti *brziPrsti = qobject_cast<DBrziPrsti*>(activeWindow->widget()))
     {
         brziPrsti->novoPitanje();
+    }
+}
+
+void AdministrationWindow::actionObrisiPitanje_click(void)
+{
+    QMdiSubWindow *activeWindow = m_mdiArea->activeSubWindow();
+    
+    if(DBrziPrsti *brziPrsti = qobject_cast<DBrziPrsti*>(activeWindow->widget()))
+    {
+        brziPrsti->obrisiPitanje();
     }
 }
 

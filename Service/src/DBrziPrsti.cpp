@@ -82,3 +82,15 @@ void DBrziPrsti::customMenuRequest(QPoint pos)
     QModelIndex index = indexAt(pos);
     m_popupKviz->popup(this->viewport()->mapToGlobal(pos));
 }
+
+void DBrziPrsti::obrisiPitanje(void)
+{
+    QModelIndex index = currentIndex();
+    Database db;
+    
+    if(db.open())
+    {
+        db.obrisiBrzePrste(m_pitanja[index.row()].getId());
+        m_pitanja.removeAt(index.row());
+    }
+}

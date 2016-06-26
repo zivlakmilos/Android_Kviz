@@ -114,3 +114,20 @@ BrziPrsti Database::snimiBrzePrste(BrziPrsti brziPrsti, int kvizId)
     
     return brziPrsti;
 }
+
+void Database::obrisiBrzePrste(int id)
+{
+    QSqlQuery query(m_db);
+    
+    m_db.transaction();
+    query.prepare("DELETE FROM brzi_prsti WHERE id=:id");
+    query.bindValue(":id", id);
+    query.exec();
+    
+    query.prepare("DELETE FROM kviz_pitanja "
+                  "WHERE pitanje_id=:id AND tip=:tip");
+    query.bindValue(":id", id);
+    query.bindValue(":tip", Kviz::BrziPrsti);
+    query.exec();
+    m_db.commit();
+}

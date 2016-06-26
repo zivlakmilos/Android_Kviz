@@ -21,6 +21,7 @@ public:
     virtual ~DBrziPrsti(void);
     
     void novoPitanje(void);
+    void obrisiPitanje(void);
     void addAction(QAction *action);
     
 private:
