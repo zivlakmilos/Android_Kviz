@@ -28,7 +28,6 @@ private:
     BrziPrsti snimiBrzePrste(BrziPrsti brziPrsti);
     
     Kviz *m_kviz;
-    QList<BrziPrsti> m_pitanja;
     MBrziPrsti *m_model;
     
     QMenu *m_popupKviz;

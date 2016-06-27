@@ -26,7 +26,7 @@ QVariant MBrziPrsti::data(const QModelIndex &index, int role) const
 {
     switch(role)
     {
-        case Qt::DisplayRole:
+        case Qt::DisplayRole: case Qt::EditRole:
             return podatakZaPrikaz(index.column(), index.row());
             break;
     }
@@ -93,4 +93,27 @@ QVariant MBrziPrsti::podatakZaPrikaz(int column, int row) const
             return m_data[row].getOdgovor();
             break;
     }
+}
+
+void MBrziPrsti::dataChange(int index, BrziPrsti data)
+{
+    m_data[index] = data;
+    emit dataChanged(this->index(index - 1, 0),
+                     this->index(index - 1, columnCount() - 1));
+}
+
+void MBrziPrsti::addData(BrziPrsti data)
+{
+    m_data.append(data);
+    insertRow(rowCount());
+    emit dataChanged(index(rowCount() - 1, 0),
+                     index(rowCount() - 1, columnCount() - 1));
+}
+
+void MBrziPrsti::removeData(int index)
+{
+    m_data.removeAt(index);
+    removeRow(index);
+    emit dataChanged(this->index(index, 0),
+                     this->index(index, columnCount() - 1));
 }

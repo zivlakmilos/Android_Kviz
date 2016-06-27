@@ -17,11 +17,18 @@ DBrziPrsti::DBrziPrsti(Kviz *kviz, QWidget *parent)
     Database db;
     if(db.open())
     {
-        m_pitanja = db.preuzmiBrzePrste(m_kviz->getId());
+        QList<BrziPrsti> pitanja = db.preuzmiBrzePrste(m_kviz->getId());
+        m_model = new MBrziPrsti(pitanja, this);
+        setModel(m_model);
+    } else
+    {
+        QMessageBox::warning(this, tr("Android Kviz"),
+                             tr("Problem u komunikacijom sa bazom podataka"),
+                             QMessageBox::Ok);
     }
     
-    m_model = new MBrziPrsti(m_pitanja, this);
-    setModel(m_model);
+    setSelectionBehavior(QAbstractItemView::SelectRows);
+    setSelectionMode(QAbstractItemView::SingleSelection);
     
     connect(this, SIGNAL(doubleClicked(QModelIndex)),
             this, SLOT(doubleClicked(QModelIndex)));
@@ -38,7 +45,8 @@ DBrziPrsti::~DBrziPrsti(void)
 
 void DBrziPrsti::doubleClicked(QModelIndex index)
 {
-    DBrziPrstiEdit brziPrstiEditor(&m_pitanja[index.row()], this);
+    QList<BrziPrsti> pitanja = m_model->getData();
+    DBrziPrstiEdit brziPrstiEditor(&pitanja[index.row()], this);
     if(brziPrstiEditor.exec() == QDialog::Accepted)
     {
         snimiBrzePrste(brziPrstiEditor.getPitanje());
@@ -90,7 +98,7 @@ void DBrziPrsti::obrisiPitanje(void)
     
     if(db.open())
     {
-        db.obrisiBrzePrste(m_pitanja[index.row()].getId());
-        m_pitanja.removeAt(index.row());
+        db.obrisiBrzePrste(m_model->getData()[index.row()].getId());
+        m_model->removeData(index.row());
     }
 }
