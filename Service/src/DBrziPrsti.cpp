@@ -94,11 +94,19 @@ void DBrziPrsti::customMenuRequest(QPoint pos)
 void DBrziPrsti::obrisiPitanje(void)
 {
     QModelIndex index = currentIndex();
+    if(index.row() < 0)
+        return;
+    
     Database db;
     
     if(db.open())
     {
-        db.obrisiBrzePrste(m_model->getData()[index.row()].getId());
-        m_model->removeData(index.row());
+        if(QMessageBox::critical(this, tr("Android Kviz"),
+                                 tr("Da li ste sigurni da zelite da obrisete pitanje?"),
+                                 QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
+        {
+            db.obrisiBrzePrste(m_model->getData()[index.row()].getId());
+            m_model->removeData(index.row());
+        }
     }
 }
