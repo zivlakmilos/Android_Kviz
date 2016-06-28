@@ -104,16 +104,25 @@ void MBrziPrsti::dataChange(int index, BrziPrsti data)
 
 void MBrziPrsti::addData(BrziPrsti data)
 {
+    int rowIndex = rowCount();
+    
     m_data.append(data);
+    beginInsertRows(QModelIndex(), rowIndex, rowIndex);
     insertRow(rowCount());
-    emit dataChanged(index(rowCount() - 1, 0),
-                     index(rowCount() - 1, columnCount() - 1));
+    endInsertRows();
+    
+    emit dataChanged(index(rowIndex, 0),
+                     index(rowIndex, columnCount() - 1));
 }
 
 void MBrziPrsti::removeData(int index)
 {
     m_data.removeAt(index);
+    
+    beginRemoveRows(QModelIndex(), index, index);
     removeRow(index);
+    endRemoveRows();
+    
     emit dataChanged(this->index(index, 0),
                      this->index(index, columnCount() - 1));
 }
