@@ -4,6 +4,7 @@
 
 #include <data/kviz.h>
 #include <Database.h>
+#include <DPitanje.h>
 #include <DBrziPrsti.h>
 
 AdministrationWindow::AdministrationWindow(QWidget* parent)
@@ -178,9 +179,9 @@ void AdministrationWindow::actionNovoPitanje_click(void)
 {
     QMdiSubWindow *activeWindow = m_mdiArea->activeSubWindow();
     
-    if(DBrziPrsti *brziPrsti = qobject_cast<DBrziPrsti*>(activeWindow->widget()))
+    if(DPitanje *pitanje = dynamic_cast<DPitanje*>(activeWindow->widget()))
     {
-        brziPrsti->novoPitanje();
+        pitanje->novoPitanje();
     }
 }
 
@@ -188,9 +189,9 @@ void AdministrationWindow::actionObrisiPitanje_click(void)
 {
     QMdiSubWindow *activeWindow = m_mdiArea->activeSubWindow();
     
-    if(DBrziPrsti *brziPrsti = qobject_cast<DBrziPrsti*>(activeWindow->widget()))
+    if(DPitanje *pitanje = dynamic_cast<DPitanje*>(activeWindow->widget()))
     {
-        brziPrsti->obrisiPitanje();
+        pitanje->obrisiPitanje();
     }
 }
 

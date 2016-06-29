@@ -4,6 +4,7 @@
 #include <QTableView>
 
 #include <data/brziprsti.h>
+#include <DPitanje.h>
 
 class QMenu;
 class QAction;
@@ -12,7 +13,7 @@ class Kviz;
 class MBrziPrsti;
 class DBrziPrstiEdit;
 
-class DBrziPrsti : public QTableView
+class DBrziPrsti : public QTableView, public DPitanje
 {
     Q_OBJECT
     
