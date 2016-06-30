@@ -15,13 +15,13 @@ public:
           m_pitanje(pitanje),
           m_odgovor(odgovor) {};
     
-    int getId(void) { return m_id; };
+    int getId(void) const { return m_id; };
     void setId(int id) { if(m_id < 0) m_id = id; };
     
-    QString getPitanje(void) { return m_pitanje; };
+    QString getPitanje(void) const { return m_pitanje; };
     void setPitanje(QString pitanje) { m_pitanje = pitanje; };
     
-    QString getOdgovor(void) { return m_odgovor; };
+    QString getOdgovor(void) const { return m_odgovor; };
     void setOdgovor(QString odgovor) { m_odgovor = odgovor; };
     
 private:

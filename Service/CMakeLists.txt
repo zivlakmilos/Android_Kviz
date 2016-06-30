@@ -16,6 +16,9 @@ set(AndroidKviz_SRCS
     src/DBrziPrsti.cpp
     src/data/MBrziPrsti.cpp
     src/DBrziPrstiEdit.cpp
+    src/DKoZnaZna.cpp
+    src/data/MKoZnaZna.cpp
+    src/DKoZnaZnaEdit.cpp
 )
 
 set(AndroidKviz_HEADERS
@@ -24,6 +27,9 @@ set(AndroidKviz_HEADERS
     include/DBrziPrsti.h
     include/data/MBrziPrsti.h
     include/DBrziPrstiEdit.h
+    include/DKoZnaZna.h
+    include/data/MKoZnaZna.h
+    include/DKoZnaZnaEdit.h
 )
 
 set(AndroidKviz_RESOURCES

@@ -7,6 +7,7 @@
 
 #include <data/kviz.h>
 #include <data/brziprsti.h>
+#include <data/koznazna.h>
 
 Database::Database(void)
 {
@@ -130,4 +131,78 @@ void Database::obrisiBrzePrste(int id)
     query.bindValue(":tip", Kviz::BrziPrsti);
     query.exec();
     m_db.commit();
+}
+
+KoZnaZna Database::snimiKoZnaZna(KoZnaZna koZnaZna, int kvizId)
+{
+    QSqlQuery query(m_db);
+    
+    if(koZnaZna.getId() < 0)
+    {
+        query.prepare("INSERT INTO ko_zna_zna (pitanje, odgovor) "
+                      "VALUES (:pitanje, :odgovor)");
+        query.bindValue(":pitanje", koZnaZna.getPitanje());
+        query.bindValue(":odgovor", koZnaZna.getOdgovor());
+        query.exec();
+        
+        koZnaZna.setId(query.lastInsertId().toInt());
+        
+        query.prepare("INSERT INTO kviz_pitanja (tip, kviz_id, pitanje_id) "
+                      "VALUES (:tip, :kviz_id, LAST_INSERT_ID())");
+        query.bindValue(":tip", Kviz::KoZnaZna);
+        query.bindValue(":kvi_id", kvizId);
+        query.exec();
+    } else
+    {
+        query.prepare("UPDATE brzi_prsti SET "
+                      "pitanje=:pitanje, "
+                      "odgovor=:odgovor "
+                      "WHERE id=:id");
+        query.bindValue(":id", koZnaZna.getId());
+        query.bindValue(":odgovor", koZnaZna.getOdgovor());
+        query.exec();
+    }
+    
+    return koZnaZna;
+}
+
+void Database::obrisiKoZnaZna(int id)
+{
+    QSqlQuery query(m_db);
+    
+    m_db.transaction();
+    query.prepare("DELETE FROM ko_zna_zna WHERE id=:id");
+    query.bindValue(":id", id);
+    query.exec();
+    
+    query.prepare("DELETE FROM kviz_pitanja "
+                  "WHERE pitanje_id=:id AND tip=:tip");
+    query.bindValue(":id", id);
+    query.bindValue(":tip", Kviz::BrziPrsti);
+    query.exec();
+    m_db.commit();
+}
+
+QList<KoZnaZna> Database::preuzmiKoZnaZna(int kvizId)
+{
+    QList<KoZnaZna> result;
+    QSqlQuery query(m_db);
+    
+    query.prepare("SELECT kzz.id, kzz.pitanje, kzz.odgovor "
+                  "FROM ko_zna_zna kzz "
+                  "LEFT JOIN kviz_pitanja p ON kzz.id = p.pitanje_id "
+                  "WHERE p.kviz_id = 1 AND p.tip = :tip");
+    query.bindValue(":kviz_id", kvizId);
+    query.bindValue(":tip", Kviz::KoZnaZna);
+    query.exec();
+    
+    while(query.next())
+    {
+        int id = query.value(0).toInt();
+        QString pitanje = query.value(1).toString();
+        QString odgovor = query.value(2).toString();
+        result.append(KoZnaZna(id, pitanje, odgovor));
+    }
+    
+    return result;
 }

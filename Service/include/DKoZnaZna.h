@@ -10,6 +10,7 @@ class QMenu;
 class QAction;
 
 class Kviz;
+class MKoZnaZna;
 
 class DKoZnaZna : public QTableView, public DPitanje
 {
@@ -24,11 +25,16 @@ public:
     void addAction(QAction *action);
     
 private:
-    KoZnaZna snimiKoZnaZna;
+    KoZnaZna snimiKoZnaZna(KoZnaZna koZnaZna);
     
     Kviz *m_kviz;
+    MKoZnaZna *m_model;
     
     QMenu *m_popupKviz;
+    
+private slots:
+    void doubleClicked(QModelIndex index);
+    void customMenuRequest(QPoint pos);
     
 protected:
     void closeEvent(QCloseEvent *event);

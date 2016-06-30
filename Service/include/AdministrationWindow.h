@@ -53,6 +53,7 @@ private slots:
     void actionNoviKviz_click(void);
     void actionOtvoriKviz_click(void);
     void actionBrziPrsti_click(void);
+    void actionKoZnaZna_click(void);
     void actionNovoPitanje_click(void);
     void actionObrisiPitanje_click(void);
     void subWindowsActiveChanged(QMdiSubWindow *activeWindow);

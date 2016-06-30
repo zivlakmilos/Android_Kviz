@@ -6,6 +6,7 @@
 #include <Database.h>
 #include <DPitanje.h>
 #include <DBrziPrsti.h>
+#include <DKoZnaZna.h>
 
 AdministrationWindow::AdministrationWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -84,6 +85,8 @@ void AdministrationWindow::setupMenu(void)
     m_actionKoZnaZna->setIcon(QIcon(tr(":img/ko_zna_zna.png")));
     m_actionKoZnaZna->setToolTip(tr("Izmena, dodatavanje i brisanje pitanja za ko zna zna"));
     m_actionKoZnaZna->setStatusTip(tr("Izmena, dodatavanje i brisanje pitanja za ko zna zna"));
+    connect(m_actionKoZnaZna, SIGNAL(triggered()),
+            this, SLOT(actionKoZnaZna_click()));
     
     m_actionAsocijacije = m_tbPitanja->addAction(tr("Asocijacije"));
     m_actionAsocijacije->setIcon(QIcon(tr(":img/asocijacije.jpg")));
@@ -204,4 +207,19 @@ void AdministrationWindow::subWindowsActiveChanged(QMdiSubWindow* activeWindow)
     {
         m_tbPitanjaDodatni->show();
     }
+}
+
+void AdministrationWindow::actionKoZnaZna_click(void)
+{
+    DKoZnaZna *koZnaZna = new DKoZnaZna(&m_kviz, this);
+    QMdiSubWindow *subWindow = m_mdiArea->addSubWindow(koZnaZna);
+    
+    koZnaZna->addAction(m_actionNovoPitanje);
+    koZnaZna->addAction(m_actionObrisiPitanje);
+    
+    m_actionKoZnaZna->setEnabled(false);
+    subWindow->show();
+    
+    connect(koZnaZna, SIGNAL(close(bool)),
+            m_actionKoZnaZna, SLOT(setEnabled(bool)));
 }
