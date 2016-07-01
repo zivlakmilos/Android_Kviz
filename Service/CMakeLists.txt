@@ -19,6 +19,9 @@ set(AndroidKviz_SRCS
     src/DKoZnaZna.cpp
     src/data/MKoZnaZna.cpp
     src/DKoZnaZnaEdit.cpp
+    src/DAsocijacije.cpp
+    src/data/MAsocijacije.cpp
+    src/DAsocijacijeEdit.cpp
 )
 
 set(AndroidKviz_HEADERS
@@ -30,6 +33,9 @@ set(AndroidKviz_HEADERS
     include/DKoZnaZna.h
     include/data/MKoZnaZna.h
     include/DKoZnaZnaEdit.h
+    include/DAsocijacije.h
+    include/data/MAsocijacije.h
+    include/DAsocijacijeEdit.h
 )
 
 set(AndroidKviz_RESOURCES

@@ -7,6 +7,7 @@
 #include <DPitanje.h>
 #include <DBrziPrsti.h>
 #include <DKoZnaZna.h>
+#include <DAsocijacije.h>
 
 AdministrationWindow::AdministrationWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -92,6 +93,8 @@ void AdministrationWindow::setupMenu(void)
     m_actionAsocijacije->setIcon(QIcon(tr(":img/asocijacije.jpg")));
     m_actionAsocijacije->setToolTip(tr("Izmena, dodavanja i brisanje asocijacija"));
     m_actionAsocijacije->setStatusTip(tr("Izmena, dodavanje i brisanje asocijacija"));
+    connect(m_actionAsocijacije, SIGNAL(triggered()),
+            this, SLOT(actionAsocijacije_click()));
     
     m_actionNovoPitanje = m_tbPitanjaDodatni->addAction(tr("Novo pitanje"));
     m_actionNovoPitanje->setIcon(QIcon(tr(":img/new_question")));
@@ -222,4 +225,19 @@ void AdministrationWindow::actionKoZnaZna_click(void)
     
     connect(koZnaZna, SIGNAL(close(bool)),
             m_actionKoZnaZna, SLOT(setEnabled(bool)));
+}
+
+void AdministrationWindow::actionAsocijacije_click(void)
+{
+    DAsocijacije *asocijacije = new DAsocijacije(&m_kviz, this);
+    QMdiSubWindow *subWindow = m_mdiArea->addSubWindow(asocijacije);
+    
+    asocijacije->addAction(m_actionNovoPitanje);
+    asocijacije->addAction(m_actionObrisiPitanje);
+    
+    m_actionAsocijacije->setEnabled(false);
+    subWindow->show();
+    
+    connect(asocijacije, SIGNAL(close(bool)),
+            m_actionAsocijacije, SLOT(setEnabled(bool)));
 }
