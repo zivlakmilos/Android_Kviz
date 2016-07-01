@@ -61,6 +61,25 @@ public:
           m_d3(d3),
           m_d4(d4) {};
     
+    int getId(void) const { return m_id; };
+    void setId(int id) { if(m_id < 0) m_id = id; };
+    QString getA(void) const { return m_a; };
+    void setA(QString a) { m_a = a; };
+    QString getB(void) const { return m_a; };
+    void setB(QString b) { m_b = b; };
+    QString getC(void) const { return m_a; };
+    void setC(QString c) { m_c = c; };
+    QString getD(void) const { return m_a; };
+    void setD(QString d) { m_d = d; };
+    QString getA1(void) const { return m_a1; };
+    void setA1(QString a1) { m_a1 = a1; };
+    QString getA2(void) const { return m_a2; };
+    void setA2(QString a2) { m_a2 = a2; };
+    QString getA3(void) const { return m_a3; };
+    void setA3(QString a3) { m_a3 = a3; };
+    QString getA4(void) const { return m_a4; };
+    void setA4(QString a4) { m_a2 = a4; };
+    
 private:
     int m_id;
     QString m_a;
