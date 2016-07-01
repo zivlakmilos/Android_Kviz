@@ -8,6 +8,7 @@
 #include <data/kviz.h>
 #include <data/brziprsti.h>
 #include <data/koznazna.h>
+#include <data/asocijacije.h>
 
 Database::Database(void)
 {
@@ -205,4 +206,154 @@ QList<KoZnaZna> Database::preuzmiKoZnaZna(int kvizId)
     }
     
     return result;
+}
+
+QList<Asocijacije> Database::preuzmiAsocijacije(int kvizId)
+{
+    QList<Asocijacije> result;
+    QSqlQuery query(m_db);
+    
+    query.prepare("SELECT a.id, a.konacno, a.a, a.b, a.c, a.d, "
+                  "a.a1, a.a2, a.a3, a.a4, "
+                  "a.b1, a.b2, a.b3, a.b4, "
+                  "a.c1, a.c2, a.c3, a.c3, "
+                  "a.d1, a.d2, a.d3, a.d4 "
+                  "FROM asocijacije a "
+                  "LEFT JOIN kviz_pitanja p ON a.id = p.pitanje_id "
+                  "WHERE p.kviz_id = 1 AND p.tip = :tip");
+    query.bindValue(":kviz_id", kvizId);
+    query.bindValue(":tip", Kviz::BrziPrsti);
+    query.exec();
+    
+    while(query.next())
+    {
+        Asocijacije asocijacije;
+        asocijacije.setId(query.value(0).toInt());
+        asocijacije.setKonacnoResenje(query.value(1).toString());
+        asocijacije.setA(query.value(2).toString());
+        asocijacije.setB(query.value(3).toString());
+        asocijacije.setC(query.value(4).toString());
+        asocijacije.setD(query.value(5).toString());
+        asocijacije.setA1(query.value(6).toString());
+        asocijacije.setA2(query.value(7).toString());
+        asocijacije.setA3(query.value(8).toString());
+        asocijacije.setA4(query.value(9).toString());
+        asocijacije.setB1(query.value(7).toString());
+        asocijacije.setB2(query.value(8).toString());
+        asocijacije.setB3(query.value(9).toString());
+        asocijacije.setB4(query.value(10).toString());
+        asocijacije.setC1(query.value(11).toString());
+        asocijacije.setC2(query.value(12).toString());
+        asocijacije.setC3(query.value(13).toString());
+        asocijacije.setC4(query.value(14).toString());
+        asocijacije.setD1(query.value(15).toString());
+        asocijacije.setD2(query.value(16).toString());
+        asocijacije.setD3(query.value(17).toString());
+        asocijacije.setD4(query.value(18).toString());
+        result.append(asocijacije);
+    }
+    
+    return result;
+}
+
+Asocijacije Database::snimiAsocijacije(Asocijacije asocijacije, int kvizId)
+{
+    QSqlQuery query(m_db);
+    
+    if(asocijacije.getId() < 0)
+    {
+        query.prepare("INSERT INTO asocijacije (konacno, a, b, c, d "
+                      "a1, a2, a3, a4, "
+                      "b1, b2, b3, b4, "
+                      "c1, c2, c3, c4, "
+                      "d1, d2, d3, d4) "
+                      "VALUES (:konacno, :a, :b, :c, :d, "
+                      ":a1, :a2, :a3, :a4, "
+                      ":b1, :b2, :b3, :b4, "
+                      ":c1, :c2, :c3, :c4, "
+                      ":d1, :d2, :d3, :d4)");
+        query.bindValue(":konacno", asocijacije.getKonacnoResenje());
+        query.bindValue(":a", asocijacije.getA());
+        query.bindValue(":b", asocijacije.getB());
+        query.bindValue(":c", asocijacije.getC());
+        query.bindValue(":d", asocijacije.getD());
+        query.bindValue(":a1", asocijacije.getA1());
+        query.bindValue(":a2", asocijacije.getA2());
+        query.bindValue(":a3", asocijacije.getA3());
+        query.bindValue(":a4", asocijacije.getA4());
+        query.bindValue(":b1", asocijacije.getB1());
+        query.bindValue(":b2", asocijacije.getB2());
+        query.bindValue(":b3", asocijacije.getB3());
+        query.bindValue(":b4", asocijacije.getB4());
+        query.bindValue(":c1", asocijacije.getC1());
+        query.bindValue(":c2", asocijacije.getC2());
+        query.bindValue(":c3", asocijacije.getC3());
+        query.bindValue(":c4", asocijacije.getC4());
+        query.bindValue(":d1", asocijacije.getD1());
+        query.bindValue(":d2", asocijacije.getD2());
+        query.bindValue(":d3", asocijacije.getD3());
+        query.bindValue(":d4", asocijacije.getD4());
+        query.exec();
+        
+        asocijacije.setId(query.lastInsertId().toInt());
+        
+        query.prepare("INSERT INTO kviz_pitanja (tip, kviz_id, pitanje_id) "
+                      "VALUES (:tip, :kviz_id, LAST_INSERT_ID())");
+        query.bindValue(":tip", Kviz::Asocijacije);
+        query.bindValue(":kvi_id", kvizId);
+        query.exec();
+    } else
+    {
+        query.prepare("UPDATE brzi_prsti SET "
+                      "konacno=:konacno, "
+                      "a=:a, b=:b, c=:c, d=:d, "
+                      "a1=:a1, a2=:a2, a3=:a3, a4=:a4, "
+                      "b1=:b1, b2=:b2, b3=:b3, b4=:b4, "
+                      "c1=:c1, c2=:c2, c3=:c3, c4=:c4, "
+                      "d1=:d1, d2=:d2, d3=:d3, d4=:d4 "
+                      "WHERE id=:id");
+        query.bindValue(":id", asocijacije.getId());
+        query.bindValue(":konacno", asocijacije.getKonacnoResenje());
+        query.bindValue(":a", asocijacije.getA());
+        query.bindValue(":b", asocijacije.getB());
+        query.bindValue(":c", asocijacije.getC());
+        query.bindValue(":d", asocijacije.getD());
+        query.bindValue(":a1", asocijacije.getA1());
+        query.bindValue(":a2", asocijacije.getA2());
+        query.bindValue(":a3", asocijacije.getA3());
+        query.bindValue(":a4", asocijacije.getA4());
+        query.bindValue(":b1", asocijacije.getB1());
+        query.bindValue(":b2", asocijacije.getB2());
+        query.bindValue(":b3", asocijacije.getB3());
+        query.bindValue(":b4", asocijacije.getB4());
+        query.bindValue(":c1", asocijacije.getC1());
+        query.bindValue(":c2", asocijacije.getC2());
+        query.bindValue(":c3", asocijacije.getC3());
+        query.bindValue(":c4", asocijacije.getC4());
+        query.bindValue(":d1", asocijacije.getD1());
+        query.bindValue(":d2", asocijacije.getD2());
+        query.bindValue(":d3", asocijacije.getD3());
+        query.bindValue(":d4", asocijacije.getD4());
+        query.exec();
+        query.exec();
+    }
+    
+    return asocijacije;
+}
+
+void Database::obrisiAsocijacije(int id)
+{
+    QSqlQuery query(m_db);
+    
+    m_db.transaction();
+    query.prepare("DELETE FROM asocijacije WHERE id=:id");
+    query.bindValue(":id", id);
+    query.exec();
+    
+    query.prepare("DELETE FROM kviz_pitanja "
+                  "WHERE pitanje_id=:id AND tip=:tip");
+    query.bindValue(":id", id);
+    query.bindValue(":tip", Kviz::Asocijacije);
+    query.exec();
+    m_db.commit();
 }

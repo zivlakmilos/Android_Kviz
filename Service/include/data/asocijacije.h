@@ -91,6 +91,7 @@ public:
     void setB3(QString b3) { m_b3 = b3; };
     QString getB4(void) const { return m_b4; };
     void setB4(QString b4) { m_b4 = b4; };
+    QString getC1(void) const { return m_c1; };
     void setC1(QString c1) { m_c1 = c1; };
     QString getC2(void) const { return m_c2; };
     void setC2(QString c2) { m_c2 = c2; };
@@ -98,6 +99,7 @@ public:
     void setC3(QString c3) { m_c3 = c3; };
     QString getC4(void) const { return m_c4; };
     void setC4(QString c4) { m_c4 = c4; };
+    QString getD1(void) const { return m_d1; };
     void setD1(QString d1) { m_d1 = d1; };
     QString getD2(void) const { return m_d2; };
     void setD2(QString d2) { m_d2 = d2; };

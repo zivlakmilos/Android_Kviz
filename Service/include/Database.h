@@ -8,6 +8,7 @@ class QString;
 class Kviz;
 class BrziPrsti;
 class KoZnaZna;
+class Asocijacije;
 
 class Database
 { 
@@ -19,11 +20,14 @@ public:
     
     QList<Kviz> preuzmiListuKvizova(void);
     QList<BrziPrsti> preuzmiBrzePrste(int kvizId);
-    QList<KoZnaZna> preuzmiKoZnaZna(int kvizId);
     BrziPrsti snimiBrzePrste(BrziPrsti brziPrsti, int kvizId = -1);
     void obrisiBrzePrste(int id);
+    QList<KoZnaZna> preuzmiKoZnaZna(int kvizId);
     KoZnaZna snimiKoZnaZna(KoZnaZna koZnaZna, int kvizId = -1);
     void obrisiKoZnaZna(int id);
+    QList<Asocijacije> preuzmiAsocijacije(int kvizId);
+    Asocijacije snimiAsocijacije(Asocijacije asocijacije, int kvizId = -1);
+    void obrisiAsocijacije(int id);
     
 private:
     QSqlDatabase m_db;
