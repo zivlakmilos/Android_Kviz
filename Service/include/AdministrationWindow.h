@@ -57,6 +57,7 @@ private slots:
     void actionAsocijacije_click(void);
     void actionNovoPitanje_click(void);
     void actionObrisiPitanje_click(void);
+    void actionOProgramu_click(void);
     void subWindowsActiveChanged(QMdiSubWindow *activeWindow);
 };
 

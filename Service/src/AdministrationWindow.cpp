@@ -74,6 +74,8 @@ void AdministrationWindow::setupMenu(void)
     m_actionIzmenaKvizova->setStatusTip(tr("Izmena i brisanje kvizova"));
     
     m_actionOProgramu = m_menuPomoc->addAction(tr("&O programu"));
+    connect(m_actionOProgramu, SIGNAL(triggered()),
+            this, SLOT(actionOProgramu_click()));
     
     m_actionBrziPrsti = m_tbPitanja->addAction(tr("Brzi prsti"));
     m_actionBrziPrsti->setIcon(QIcon(tr(":img/brzi_prsti.jpg")));
@@ -240,4 +242,15 @@ void AdministrationWindow::actionAsocijacije_click(void)
     
     connect(asocijacije, SIGNAL(close(bool)),
             m_actionAsocijacije, SLOT(setEnabled(bool)));
+}
+
+void AdministrationWindow::actionOProgramu_click(void)
+{
+    QMessageBox::about(this, tr("Android Kviz"),
+                       tr("<div align=\"center\"><b>Milos Zivlak</b> <br /></div>"
+                          "email1: zivlakmilos@gmail.com <br />"
+                          "email2: zivlakmilos2@gmail.com <br />"
+                          "email3: zi@zivlakmilos.ddns.net <br />"
+                          "sajt:   <a href=\"http://zivlakmilos.ddns.net\">http://zivlakmilos.ddns.net</a> <br />"
+                          "github: <a href=\"https://github.com/zivlakmilos\">https://github.com/zivlakmilos</a> <br />"));
 }
