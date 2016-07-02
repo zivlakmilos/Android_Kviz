@@ -52,7 +52,6 @@ void DAsocijacije::closeEvent(QCloseEvent* event)
 
 void DAsocijacije::novoPitanje(void)
 {
-    /*
     Asocijacije pitanje;
     DAsocijacijeEdit asocijacijeEditor(&pitanje, this);
     if(asocijacijeEditor.exec() == QDialog::Accepted)
@@ -61,7 +60,6 @@ void DAsocijacije::novoPitanje(void)
         pitanje = snimiAsocijacije(pitanje);
         m_model->addData(pitanje);
     }
-    */
 }
 
 void DAsocijacije::obrisiPitanje(void)
@@ -84,12 +82,12 @@ void DAsocijacije::obrisiPitanje(void)
     }
 }
 
-Asocijacije DAsocijacije::snimiAsocijacije(Asocijacije koZnaZna)
+Asocijacije DAsocijacije::snimiAsocijacije(Asocijacije asocijacije)
 {
     Database db;
     if(db.open())
     {
-        return db.snimiAsocijacije(koZnaZna, m_kviz->getId());
+        return db.snimiAsocijacije(asocijacije, m_kviz->getId());
     }
 }
 
@@ -100,7 +98,6 @@ void DAsocijacije::addAction(QAction* action)
 
 void DAsocijacije::doubleClicked(QModelIndex index)
 {
-    /*
     QList<Asocijacije> pitanja = m_model->getData();
     DAsocijacijeEdit asocijacijeEditor(&pitanja[index.row()], this);
     if(asocijacijeEditor.exec() == QDialog::Accepted)
@@ -109,7 +106,6 @@ void DAsocijacije::doubleClicked(QModelIndex index)
         snimiAsocijacije(pitanje);
         m_model->dataChange(index.row(), pitanje);
     }
-    */
 }
 
 void DAsocijacije::customMenuRequest(QPoint pos)
