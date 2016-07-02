@@ -69,11 +69,11 @@ public:
     void setKonacnoResenje(QString konacnoResenje) { m_konacnoResenje = konacnoResenje; };
     QString getA(void) const { return m_a; };
     void setA(QString a) { m_a = a; };
-    QString getB(void) const { return m_a; };
+    QString getB(void) const { return m_b; };
     void setB(QString b) { m_b = b; };
-    QString getC(void) const { return m_a; };
+    QString getC(void) const { return m_c; };
     void setC(QString c) { m_c = c; };
-    QString getD(void) const { return m_a; };
+    QString getD(void) const { return m_d; };
     void setD(QString d) { m_d = d; };
     QString getA1(void) const { return m_a1; };
     void setA1(QString a1) { m_a1 = a1; };

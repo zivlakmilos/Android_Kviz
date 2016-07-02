@@ -222,7 +222,7 @@ QList<Asocijacije> Database::preuzmiAsocijacije(int kvizId)
                   "LEFT JOIN kviz_pitanja p ON a.id = p.pitanje_id "
                   "WHERE p.kviz_id = 1 AND p.tip = :tip");
     query.bindValue(":kviz_id", kvizId);
-    query.bindValue(":tip", Kviz::BrziPrsti);
+    query.bindValue(":tip", Kviz::Asocijacije);
     query.exec();
     
     while(query.next())
@@ -238,18 +238,18 @@ QList<Asocijacije> Database::preuzmiAsocijacije(int kvizId)
         asocijacije.setA2(query.value(7).toString());
         asocijacije.setA3(query.value(8).toString());
         asocijacije.setA4(query.value(9).toString());
-        asocijacije.setB1(query.value(7).toString());
-        asocijacije.setB2(query.value(8).toString());
-        asocijacije.setB3(query.value(9).toString());
-        asocijacije.setB4(query.value(10).toString());
-        asocijacije.setC1(query.value(11).toString());
-        asocijacije.setC2(query.value(12).toString());
-        asocijacije.setC3(query.value(13).toString());
-        asocijacije.setC4(query.value(14).toString());
-        asocijacije.setD1(query.value(15).toString());
-        asocijacije.setD2(query.value(16).toString());
-        asocijacije.setD3(query.value(17).toString());
-        asocijacije.setD4(query.value(18).toString());
+        asocijacije.setB1(query.value(10).toString());
+        asocijacije.setB2(query.value(11).toString());
+        asocijacije.setB3(query.value(12).toString());
+        asocijacije.setB4(query.value(13).toString());
+        asocijacije.setC1(query.value(14).toString());
+        asocijacije.setC2(query.value(15).toString());
+        asocijacije.setC3(query.value(16).toString());
+        asocijacije.setC4(query.value(17).toString());
+        asocijacije.setD1(query.value(18).toString());
+        asocijacije.setD2(query.value(19).toString());
+        asocijacije.setD3(query.value(20).toString());
+        asocijacije.setD4(query.value(21).toString());
         result.append(asocijacije);
     }
     
@@ -262,7 +262,7 @@ Asocijacije Database::snimiAsocijacije(Asocijacije asocijacije, int kvizId)
     
     if(asocijacije.getId() < 0)
     {
-        query.prepare("INSERT INTO asocijacije (konacno, a, b, c, d "
+        query.prepare("INSERT INTO asocijacije (konacno, a, b, c, d, "
                       "a1, a2, a3, a4, "
                       "b1, b2, b3, b4, "
                       "c1, c2, c3, c4, "
@@ -304,7 +304,7 @@ Asocijacije Database::snimiAsocijacije(Asocijacije asocijacije, int kvizId)
         query.exec();
     } else
     {
-        query.prepare("UPDATE brzi_prsti SET "
+        query.prepare("UPDATE asocijacije SET "
                       "konacno=:konacno, "
                       "a=:a, b=:b, c=:c, d=:d, "
                       "a1=:a1, a2=:a2, a3=:a3, a4=:a4, "
