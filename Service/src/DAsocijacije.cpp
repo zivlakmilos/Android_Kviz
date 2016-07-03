@@ -8,6 +8,7 @@
 
 #include <Database.h>
 #include <DAsocijacijeEdit.h>
+#include <WAsocijacijePreview.h>
 
 DAsocijacije::DAsocijacije(Kviz* kviz, QWidget* parent)
     : QTableView(parent),
@@ -38,6 +39,9 @@ DAsocijacije::DAsocijacije(Kviz* kviz, QWidget* parent)
     setContextMenuPolicy(Qt::CustomContextMenu);
     connect(this, SIGNAL(customContextMenuRequested(QPoint)),
             this, SLOT(customMenuRequest(QPoint)));
+    
+    m_popupPreview = new WAsocijacijePreview(this);
+    viewport()->installEventFilter(this);
 }
 
 DAsocijacije::~DAsocijacije(void)
@@ -112,4 +116,36 @@ void DAsocijacije::customMenuRequest(QPoint pos)
 {
     QModelIndex index = indexAt(pos);
     m_popupKviz->popup(this->viewport()->mapToGlobal(pos));
+}
+
+bool DAsocijacije::eventFilter(QObject* obj, QEvent* event)
+{
+    /*
+    //QAbstractItemView *asocijacije = qobject_cast<QAbstractItemView *>(obj);
+    //if(!asocijacije)
+    //    return false;
+    if(obj != this->viewport())
+        return false;
+    
+    QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+    QPoint pos = helpEvent->pos();
+    QModelIndex index = this->indexAt(pos);
+    if(!index.isValid())
+        return false;
+    */
+    
+    if(obj == viewport() && event->type() == QEvent::ToolTip)
+    {
+        QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+        QPoint pos = helpEvent->pos();
+        QModelIndex index = this->indexAt(pos);
+        Asocijacije pitanje = m_model->getData()[index.row()];
+        m_popupPreview->setData(&pitanje);
+        pos = helpEvent->globalPos();
+        m_popupPreview->move(pos);
+        m_popupPreview->show();
+        return true;
+    }
+    
+    return QTableView::eventFilter(obj, event);
 }

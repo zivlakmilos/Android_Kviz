@@ -22,6 +22,7 @@ set(AndroidKviz_SRCS
     src/DAsocijacije.cpp
     src/data/MAsocijacije.cpp
     src/DAsocijacijeEdit.cpp
+    src/WAsocijacijePreview.cpp
 )
 
 set(AndroidKviz_HEADERS
@@ -36,6 +37,7 @@ set(AndroidKviz_HEADERS
     include/DAsocijacije.h
     include/data/MAsocijacije.h
     include/DAsocijacijeEdit.h
+    include/WAsocijacijePreview.h
 )
 
 set(AndroidKviz_RESOURCES

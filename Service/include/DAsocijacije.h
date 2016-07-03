@@ -11,6 +11,7 @@ class QAction;
 
 class Kviz;
 class MAsocijacije;
+class WAsocijacijePreview;
 
 class DAsocijacije : public QTableView, public DPitanje
 {
@@ -29,6 +30,7 @@ private:
     
     Kviz *m_kviz;
     MAsocijacije *m_model;
+    WAsocijacijePreview *m_popupPreview;
     
     QMenu *m_popupKviz;
     
@@ -38,6 +40,7 @@ private slots:
     
 protected:
     void closeEvent(QCloseEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event);
     
 signals:
     void close(bool);
