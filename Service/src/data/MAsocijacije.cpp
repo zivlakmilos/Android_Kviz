@@ -29,9 +29,6 @@ QVariant MAsocijacije::data(const QModelIndex &index, int role) const
         case Qt::DisplayRole: case Qt::EditRole:
             return podatakZaPrikaz(index.column(), index.row());
             break;
-        case Qt::ToolTipRole:
-            return QString("test");
-            break;
     }
     
     return QVariant();
