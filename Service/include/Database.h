@@ -19,6 +19,7 @@ public:
     bool open(void);
     
     QList<Kviz> preuzmiListuKvizova(void);
+    Kviz snimiKviz(Kviz kviz);
     QList<BrziPrsti> preuzmiBrzePrste(int kvizId);
     BrziPrsti snimiBrzePrste(BrziPrsti brziPrsti, int kvizId = -1);
     void obrisiBrzePrste(int id);

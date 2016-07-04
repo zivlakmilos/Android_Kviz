@@ -54,7 +54,7 @@ QList<BrziPrsti> Database::preuzmiBrzePrste(int kvizId)
     query.prepare("SELECT bp.id, bp.pitanje, bp.a, bp.b, bp.c, bp.d, bp.odgovor "
                   "FROM brzi_prsti bp "
                   "LEFT JOIN kviz_pitanja p ON bp.id = p.pitanje_id "
-                  "WHERE p.kviz_id = 1 AND p.tip = :tip");
+                  "WHERE p.kviz_id = :kviz_id AND p.tip = :tip");
     query.bindValue(":kviz_id", kvizId);
     query.bindValue(":tip", Kviz::BrziPrsti);
     query.exec();
@@ -192,7 +192,7 @@ QList<KoZnaZna> Database::preuzmiKoZnaZna(int kvizId)
     query.prepare("SELECT kzz.id, kzz.pitanje, kzz.odgovor "
                   "FROM ko_zna_zna kzz "
                   "LEFT JOIN kviz_pitanja p ON kzz.id = p.pitanje_id "
-                  "WHERE p.kviz_id = 1 AND p.tip = :tip");
+                  "WHERE p.kviz_id = :kviz_id AND p.tip = :tip");
     query.bindValue(":kviz_id", kvizId);
     query.bindValue(":tip", Kviz::KoZnaZna);
     query.exec();
@@ -220,7 +220,7 @@ QList<Asocijacije> Database::preuzmiAsocijacije(int kvizId)
                   "a.d1, a.d2, a.d3, a.d4 "
                   "FROM asocijacije a "
                   "LEFT JOIN kviz_pitanja p ON a.id = p.pitanje_id "
-                  "WHERE p.kviz_id = 1 AND p.tip = :tip");
+                  "WHERE p.kviz_id = :kviz_id AND p.tip = :tip");
     query.bindValue(":kviz_id", kvizId);
     query.bindValue(":tip", Kviz::Asocijacije);
     query.exec();
@@ -356,4 +356,29 @@ void Database::obrisiAsocijacije(int id)
     query.bindValue(":tip", Kviz::Asocijacije);
     query.exec();
     m_db.commit();
+}
+
+Kviz Database::snimiKviz(Kviz kviz)
+{
+    QSqlQuery query(m_db);
+    
+    if(kviz.getId() < 0)
+    {
+        query.prepare("INSERT INTO nazivi_kvizova (naziv) "
+                      "VALUES (:naziv)");
+        query.bindValue(":naziv", kviz.getNaziv());
+        query.exec();
+        
+        kviz.setId(query.lastInsertId().toInt());
+    } else
+    {
+        query.prepare("UPDATE nazivi_kvizova SET "
+                      "naziv=:naziv, "
+                      "WHERE id=:id");
+        query.bindValue(":id", kviz.getId());
+        query.bindValue(":odgovor", kviz.getNaziv());
+        query.exec();
+    }
+    
+    return kviz;
 }

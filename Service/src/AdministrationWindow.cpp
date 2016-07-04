@@ -120,6 +120,20 @@ void AdministrationWindow::setupStatusBar(void)
 
 void AdministrationWindow::actionNoviKviz_click(void)
 {
+    bool ok;
+    QString naziv = QInputDialog::getText(this, tr("Android Kviz"),
+                                          tr("Naziv kviza:"), QLineEdit::Normal,
+                                          "", &ok);
+    if(ok && !naziv.isEmpty())
+    {
+        Database db;
+        if(db.open())
+        {
+            Kviz kviz(naziv);
+            kviz = db.snimiKviz(kviz);
+            setKviz(kviz);
+        }
+    }
 }
 
 void AdministrationWindow::actionOtvoriKviz_click(void)
