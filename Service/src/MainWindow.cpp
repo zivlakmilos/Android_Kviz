@@ -3,6 +3,7 @@
 #include <QtGui>
 
 #include <AdministrationWindow.h>
+#include <TcpService.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -27,10 +28,14 @@ void MainWindow::setupGui(void)
     m_btnAndroidProjectorMode = new QPushButton(this);
     m_btnAndroidProjectorMode->setText(tr("&Video bim"));
     m_btnAndroidProjectorMode->setFont(font);
+    connect(m_btnAndroidProjectorMode, SIGNAL(clicked()),
+            this, SLOT(btnAndroidProjectorModeClick()));
     
     m_btnAndroidMode = new QPushButton(this);
     m_btnAndroidMode->setText(tr("&Samo Android"));
     m_btnAndroidMode->setFont(font);
+    connect(m_btnAndroidMode, SIGNAL(clicked()),
+            this, SLOT(btnAndroidModeClick()));
     
     m_btnAdministration = new QPushButton(this);
     m_btnAdministration->setText(tr("&Administracija"));
@@ -49,4 +54,14 @@ void MainWindow::btnAdministrationClick(void)
     administrationWindow->show();
     connect(administrationWindow, SIGNAL(close()), this, SLOT(show()));
     hide();
+}
+
+void MainWindow::btnAndroidProjectorModeClick(void)
+{
+    TcpService *test = new TcpService(this);
+    test->start();
+}
+
+void MainWindow::btnAndroidModeClick(void)
+{
 }

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 project(AndroidKviz)
-find_package(Qt4 COMPONENTS QtCore QtGui QtSql REQUIRED)
+find_package(Qt4 COMPONENTS QtCore QtGui QtSql QtNetwork REQUIRED)
 
 set (CMAKE_AUTORCC on)
 
@@ -23,6 +23,8 @@ set(AndroidKviz_SRCS
     src/data/MAsocijacije.cpp
     src/DAsocijacijeEdit.cpp
     src/WAsocijacijePreview.cpp
+    src/TcpService.cpp
+    src/TcpClient.cpp
 )
 
 set(AndroidKviz_HEADERS
@@ -38,6 +40,8 @@ set(AndroidKviz_HEADERS
     include/data/MAsocijacije.h
     include/DAsocijacijeEdit.h
     include/WAsocijacijePreview.h
+    include/TcpService.h
+    include/TcpClient.h
 )
 
 set(AndroidKviz_RESOURCES
@@ -50,7 +54,7 @@ endforeach(MOCheader)
 
 add_executable(AndroidKviz ${AndroidKviz_SRCS} ${MOCsrc} ${AndroidKviz_RESOURCES})
 target_link_libraries(AndroidKviz ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY}
-    ${QT_QTSQL_LIBRARY})
+    ${QT_QTSQL_LIBRARY} ${QT_QTNETWORK_LIBRARY})
 target_compile_features(AndroidKviz PRIVATE cxx_range_for)
 
 install(TARGETS AndroidKviz RUNTIME DESTINATION bin)

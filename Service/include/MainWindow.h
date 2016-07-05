@@ -27,6 +27,8 @@ private:
     
 private slots:
     void btnAdministrationClick(void);
+    void btnAndroidProjectorModeClick(void);
+    void btnAndroidModeClick(void);
 };
 
 #endif // _MAIN_WINDOW_H_
