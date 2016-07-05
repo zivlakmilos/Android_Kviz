@@ -35,8 +35,7 @@ void TcpClient::run(void)
 void TcpClient::readyRead(void)
 {
     QByteArray data = m_socket->readAll();
-    m_socket->write(data);
-    m_socket->flush();
+    emit recivedData(m_id, data);
 }
 
 void TcpClient::disconnected(void)

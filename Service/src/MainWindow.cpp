@@ -2,8 +2,9 @@
 
 #include <QtGui>
 
-#include <AdministrationWindow.h>
 #include <TcpService.h>
+#include <AdministrationWindow.h>
+#include <WQuizControl.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -64,4 +65,7 @@ void MainWindow::btnAndroidProjectorModeClick(void)
 
 void MainWindow::btnAndroidModeClick(void)
 {
+    WQuizControl *test = new WQuizControl(this);
+    test->setWindowFlags(Qt::Window);
+    test->show();
 }

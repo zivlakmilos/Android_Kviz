@@ -25,6 +25,8 @@ set(AndroidKviz_SRCS
     src/WAsocijacijePreview.cpp
     src/TcpService.cpp
     src/TcpClient.cpp
+    src/DAndroidProjector.cpp
+    src/WQuizControl.cpp
 )
 
 set(AndroidKviz_HEADERS
@@ -42,6 +44,8 @@ set(AndroidKviz_HEADERS
     include/WAsocijacijePreview.h
     include/TcpService.h
     include/TcpClient.h
+    include/DAndroidProjector.h
+    include/WQuizControl.h
 )
 
 set(AndroidKviz_RESOURCES

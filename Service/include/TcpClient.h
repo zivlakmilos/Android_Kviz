@@ -22,6 +22,9 @@ private:
 private slots:
     void readyRead(void);
     void disconnected(void);
+    
+signals:
+    void recivedData(int id, QByteArray data);
 };
 
 #endif // _TCP_CLIENT_H_
