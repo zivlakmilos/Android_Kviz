@@ -5,6 +5,7 @@
 #include <TcpService.h>
 #include <AdministrationWindow.h>
 #include <WQuizControl.h>
+#include <WBrziPrsti.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -61,6 +62,10 @@ void MainWindow::btnAndroidProjectorModeClick(void)
 {
     TcpService *test = new TcpService(this);
     test->start();
+    
+    WBrziPrsti *test2 = new WBrziPrsti(this);
+    test2->setWindowFlags(Qt::Window);
+    test2->show();
 }
 
 void MainWindow::btnAndroidModeClick(void)

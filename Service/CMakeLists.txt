@@ -27,6 +27,7 @@ set(AndroidKviz_SRCS
     src/TcpClient.cpp
     src/DAndroidProjector.cpp
     src/WQuizControl.cpp
+    src/WBrziPrsti.cpp
 )
 
 set(AndroidKviz_HEADERS
@@ -46,6 +47,7 @@ set(AndroidKviz_HEADERS
     include/TcpClient.h
     include/DAndroidProjector.h
     include/WQuizControl.h
+    include/WBrziPrsti.h
 )
 
 set(AndroidKviz_RESOURCES
