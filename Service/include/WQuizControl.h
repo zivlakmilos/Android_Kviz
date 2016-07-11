@@ -2,6 +2,7 @@
 #define _W_QUIZ_CONTROL_H_
 
 #include <QWidget>
+#include <QTime>
 
 class QGroupBox;
 class QSpinBox;
@@ -18,6 +19,9 @@ class WQuizControl : public QWidget
 public:
     WQuizControl(QWidget *parent = 0);
     virtual ~WQuizControl(void);
+    
+    void setBrojBrzihPrstiju(int brojBrzihPrstiju);
+    void zavrsiPitanje(void);
     
 private:
     void setupGui(void);
@@ -47,6 +51,14 @@ private:
     QHBoxLayout *m_layoutVreme[BrojTipova];
     QVBoxLayout *m_layoutSubMain[BrojTipova];
     QVBoxLayout *m_layoutMian;
+    
+private slots:
+    void btnSledecePitanje_click(void);
+    void btnRekordi_click(void);
+    
+signals:
+    void sledecePitanje(int tip, QTime vreme);
+    void rekordi(void);
 };
 
 #endif // _W_QUIZ_CONTROL_H_

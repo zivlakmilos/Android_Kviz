@@ -2,10 +2,9 @@
 
 #include <QtGui>
 
-#include <TcpService.h>
+#include <Database.h>
 #include <AdministrationWindow.h>
-#include <WQuizControl.h>
-#include <WBrziPrsti.h>
+#include <DVideoBim.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -60,17 +59,42 @@ void MainWindow::btnAdministrationClick(void)
 
 void MainWindow::btnAndroidProjectorModeClick(void)
 {
-    TcpService *test = new TcpService(this);
-    test->start();
+    Database db;
+    if(!db.open())
+    {
+        return;
+    }
     
-    WBrziPrsti *test2 = new WBrziPrsti(this);
-    test2->setWindowFlags(Qt::Window);
-    test2->show();
+    QList<Kviz> kvizovi = db.preuzmiListuKvizova();
+    QStringList items;
+    bool ok;
+    for(Kviz kviz : kvizovi)
+    {
+        items.append(kviz.getNaziv());
+    }
+    QString item = QInputDialog::getItem(this, tr("Android Kviz"),
+                                         tr("Kviz:"), items, 0, false, &ok);
+    if(!ok || items.isEmpty())
+    {
+        return;
+    }
+    int kvizId = 0;
+    for(Kviz kviz : kvizovi)
+    {
+        if(kviz.getNaziv() == kviz.getNaziv())
+        {
+            kvizId = kviz.getId();
+            break;
+        }
+    }
+    
+    DVideoBim *videoBim = new DVideoBim(kvizId, this);
+    videoBim->setWindowFlags(Qt::Window);
+    videoBim->show();
+    connect(videoBim, SIGNAL(close()), this, SLOT(show()));
+    hide();
 }
 
 void MainWindow::btnAndroidModeClick(void)
 {
-    WQuizControl *test = new WQuizControl(this);
-    test->setWindowFlags(Qt::Window);
-    test->show();
 }

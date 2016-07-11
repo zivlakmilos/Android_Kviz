@@ -2,6 +2,8 @@
 
 #include <QtGui>
 
+#include <data/kviz.h>
+
 WQuizControl::WQuizControl(QWidget *parent)
     : QWidget(parent)
 {
@@ -36,7 +38,9 @@ void WQuizControl::setupGui(void)
         m_sliderBrojPitanja[i] = new QSlider(Qt::Horizontal, this);
         
         m_sbVreme[i] = new QSpinBox(this);
+        m_sbVreme[i]->setMaximum(120);
         m_sliderVreme[i] = new QSlider(Qt::Horizontal, this);
+        m_sliderVreme[i]->setMaximum(120);
         
         m_layoutBrojPitanja[i]->addWidget(m_sliderBrojPitanja[i]);
         m_layoutBrojPitanja[i]->addWidget(m_sbBrojPitanja[i]);
@@ -62,8 +66,47 @@ void WQuizControl::setupGui(void)
     }
     
     m_btnSledecePitanje = new QPushButton(tr("&Sledece pitanje"), this);
+    connect(m_btnSledecePitanje, SIGNAL(clicked()),
+            this, SLOT(btnSledecePitanje_click()));
+    
     m_btnRekordi = new QPushButton(tr("&Rekordi"), this);
+    connect(m_btnRekordi, SIGNAL(clicked()),
+            this, SLOT(btnRekordi_click()));
     
     m_layoutMian->addWidget(m_btnSledecePitanje);
     m_layoutMian->addWidget(m_btnRekordi);
+}
+
+void WQuizControl::btnSledecePitanje_click(void)
+{
+    int brziPrsti = m_sbBrojPitanja[BrziPrsti]->value();
+    if(brziPrsti > 0)
+    {
+        int min, sec;
+        min = m_sbVreme[BrziPrsti]->value() / 60;
+        sec = m_sbVreme[BrziPrsti]->value() - min * 60;
+        QTime vreme;
+        vreme.setHMS(0, min, sec);
+        m_sbBrojPitanja[BrziPrsti]->setValue(m_sbBrojPitanja[BrziPrsti]->value() - 1);
+        m_sbBrojPitanja[BrziPrsti]->setMaximum(m_sbBrojPitanja[BrziPrsti]->maximum() - 1);
+        m_sliderBrojPitanja[BrziPrsti]->setMaximum(m_sliderBrojPitanja[BrziPrsti]->maximum() - 1);
+        m_btnSledecePitanje->setEnabled(false);
+        emit sledecePitanje(Kviz::BrziPrsti, vreme);
+    }
+}
+
+void WQuizControl::btnRekordi_click(void)
+{
+    emit rekordi();
+}
+
+void WQuizControl::setBrojBrzihPrstiju(int brojBrzihPrstiju)
+{
+    m_sbBrojPitanja[BrziPrsti]->setMaximum(brojBrzihPrstiju);
+    m_sliderBrojPitanja[BrziPrsti]->setMaximum(brojBrzihPrstiju);
+}
+
+void WQuizControl::zavrsiPitanje(void)
+{
+    m_btnSledecePitanje->setEnabled(true);
 }

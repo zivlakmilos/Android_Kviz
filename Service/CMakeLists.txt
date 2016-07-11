@@ -28,6 +28,7 @@ set(AndroidKviz_SRCS
     src/DAndroidProjector.cpp
     src/WQuizControl.cpp
     src/WBrziPrsti.cpp
+    src/DVideoBim.cpp
 )
 
 set(AndroidKviz_HEADERS
@@ -48,6 +49,7 @@ set(AndroidKviz_HEADERS
     include/DAndroidProjector.h
     include/WQuizControl.h
     include/WBrziPrsti.h
+    include/DVideoBim.h
 )
 
 set(AndroidKviz_RESOURCES

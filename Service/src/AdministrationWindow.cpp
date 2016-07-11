@@ -147,7 +147,7 @@ void AdministrationWindow::actionOtvoriKviz_click(void)
         return;
     }
     
-    QList<Kviz> kvizovi= db.preuzmiListuKvizova();
+    QList<Kviz> kvizovi = db.preuzmiListuKvizova();
     QStringList items;
     bool ok;
     for(Kviz kviz : kvizovi)
