@@ -5,12 +5,14 @@
 #include <data/kviz.h>
 
 #include <Database.h>
+#include <TcpService.h>
 #include <WQuizControl.h>
 #include <WBrziPrsti.h>
 
 DVideoBim::DVideoBim(int kvizId, QWidget *parent)
     : QWidget(parent),
-      m_kvizId(kvizId)
+      m_kvizId(kvizId),
+      m_status(S_IDLE)
 {
     setWindowTitle(tr("Android Kviz"));
     setupGui();
@@ -28,10 +30,33 @@ DVideoBim::DVideoBim(int kvizId, QWidget *parent)
     m_timer->setInterval(1000);
     connect(m_timer, SIGNAL(timeout()),
             this, SLOT(pitanjeTimeout()));
+    
+    m_service = new TcpService(this);
+    if(!m_service->start())
+    {
+        QMessageBox::warning(this, tr("Android Kviz"),
+                             tr("Nije moguce pokrenuti servis!"),
+                             QMessageBox::QMessageBox::Ok);
+        close();
+    } else
+    {
+        connect(m_service, SIGNAL(recivedData(int, QString)),
+                this, SLOT(recivedData(int, QString)));
+        m_status = S_Prijava;
+        QProgressDialog *prijava = new QProgressDialog(this);
+        prijava->setLabelText(tr("Prijava takmicara"));
+        prijava->setCancelButtonText(tr("Zavrsi prijavu"));
+        prijava->setRange(0, 0);
+        prijava->setValue(0);
+        prijava->exec();
+        m_status = S_IDLE;
+    }
 }
 
 DVideoBim::~DVideoBim(void)
 {
+    m_service->close();
+    delete m_service;
 }
 
 void DVideoBim::setupGui(void)
@@ -91,4 +116,19 @@ void DVideoBim::pitanjeTimeout(void)
         m_wQuizControl->zavrsiPitanje();
         m_timer->stop();
     }
+}
+
+void DVideoBim::recivedData(int id, QString data)
+{
+    switch(m_status)
+    {
+        case S_Prijava:
+            if(!m_rekordi.contains(id))
+            {
+                Takmicar takmicar(id, data);
+                m_rekordi[id] = takmicar;
+            }
+            break;
+    }
+    qDebug() << m_rekordi[id].getIme();
 }

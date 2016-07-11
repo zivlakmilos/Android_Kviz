@@ -14,6 +14,7 @@ public:
     virtual ~TcpClient(void);
     
     void run(void);
+    void send(QByteArray data);
     
 private:
     QTcpSocket *m_socket;

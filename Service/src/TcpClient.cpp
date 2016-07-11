@@ -43,3 +43,14 @@ void TcpClient::disconnected(void)
     m_socket->deleteLater();
     exit(0);
 }
+
+void TcpClient::send(QByteArray data)
+{
+    if(!m_socket->isOpen())
+    {
+        m_socket->disconnect();
+        return;
+    }
+    m_socket->write(data);
+    m_socket->flush();
+}

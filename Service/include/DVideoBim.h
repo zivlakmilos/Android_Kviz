@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include <QTime>
+#include <QMap>
+
+#include <data/takmicar.h>
 
 class QSplitter;
 class QVBoxLayout;
@@ -11,6 +14,7 @@ class QTimer;
 class BrziPrsti;
 class WQuizControl;
 class WBrziPrsti;
+class TcpService;
 
 class DVideoBim : public QWidget
 {
@@ -20,6 +24,12 @@ public:
     DVideoBim(int kvizId, QWidget *parent = 0);
     ~DVideoBim(void);
     
+    enum { S_IDLE = 0,
+           S_Prijava,
+           S_BrziPrsti,
+           S_KoZnaZna,
+           S_Asocijacije };
+    
 private:
     void setupGui(void);
     
@@ -27,6 +37,10 @@ private:
     QList<BrziPrsti> m_brziPrsti;
     QTime m_zadatoVreme;
     QTime m_trenutnoVreme;
+    int m_status;
+    QMap<int, Takmicar> m_rekordi;
+    
+    TcpService *m_service;
     
     QVBoxLayout *m_layoutMain;
     QSplitter *m_splitter;
@@ -42,6 +56,7 @@ private slots:
     void sledecePitanje(int tip, QTime vreme);
     void rekordi(void);
     void pitanjeTimeout(void);
+    void recivedData(int id, QString data);
     
 signals:
     void close(void);
