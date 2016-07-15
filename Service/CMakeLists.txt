@@ -29,6 +29,8 @@ set(AndroidKviz_SRCS
     src/WQuizControl.cpp
     src/WBrziPrsti.cpp
     src/DVideoBim.cpp
+    src/WRekordi.cpp
+    src/data/MRekordi.cpp
 )
 
 set(AndroidKviz_HEADERS
@@ -50,6 +52,8 @@ set(AndroidKviz_HEADERS
     include/WQuizControl.h
     include/WBrziPrsti.h
     include/DVideoBim.h
+    include/WRekordi.h
+    include/data/MRekordi.h
 )
 
 set(AndroidKviz_RESOURCES

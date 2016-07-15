@@ -15,6 +15,7 @@ class BrziPrsti;
 class WQuizControl;
 class WBrziPrsti;
 class TcpService;
+class WRekordi;
 
 class DVideoBim : public QWidget
 {
@@ -39,6 +40,8 @@ private:
     QTime m_trenutnoVreme;
     int m_status;
     QMap<int, Takmicar> m_rekordi;
+    int m_bodovi;
+    int m_rbPitanja;
     
     TcpService *m_service;
     
@@ -46,6 +49,7 @@ private:
     QSplitter *m_splitter;
     WQuizControl *m_wQuizControl;
     WBrziPrsti *m_wBrziPrsti;
+    WRekordi *m_wRekordi;
     
     QTimer *m_timer;
     

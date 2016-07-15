@@ -20,29 +20,29 @@ public:
           m_bodoviAsocijacije(0) {};
     virtual ~Takmicar(void) {};
     
-    int getId(void) { return m_id; };
+    int getId(void) const { return m_id; };
     void setId(int id) { m_id = id; };
     
-    QString getIme(void) { return m_ime; };
+    QString getIme(void) const { return m_ime; };
     void setIme(QString ime) { m_ime = ime; };
     
-    float getBodoviUkupno(void) { return m_bodoviUkupno; };
+    float getBodoviUkupno(void) const { return m_bodoviUkupno; };
     
-    float getBodoviBrziPrsti(void) { return m_bodoviBrziPrsti; };
+    float getBodoviBrziPrsti(void) const { return m_bodoviBrziPrsti; };
     void addBodoviBrziPrsti(float bodoviBrziPrsti)
     {
         m_bodoviBrziPrsti += bodoviBrziPrsti;
         m_bodoviUkupno += bodoviBrziPrsti;
     };
     
-    float getBodoviKoZnaZna(void) { return m_bodoviKoZnaZna; };
+    float getBodoviKoZnaZna(void) const { return m_bodoviKoZnaZna; };
     void addBodoviKoZnaZna(float bodoviKoZnaZna)
     {
         m_bodoviKoZnaZna += bodoviKoZnaZna;
         m_bodoviUkupno += bodoviKoZnaZna;
     };
     
-    float getBodoviAsocijacije(void) { return m_bodoviAsocijacije; };
+    float getBodoviAsocijacije(void) const { return m_bodoviAsocijacije; };
     void addBodoviAsocijacije(float bodoviAsocijacije)
     {
         m_bodoviAsocijacije += bodoviAsocijacije;

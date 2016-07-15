@@ -24,7 +24,7 @@ public:
           m_odgovor(odgovor) {};
     virtual ~BrziPrsti(void) {};
     
-    int getId(void) { return m_id; };
+    int getId(void) const { return m_id; };
     void setId(int id) { if(m_id < 0) m_id = id; };
     
     QString getPitanje(void) const { return m_pitanje; };

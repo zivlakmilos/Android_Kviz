@@ -8,13 +8,14 @@
 #include <TcpService.h>
 #include <WQuizControl.h>
 #include <WBrziPrsti.h>
+#include <WRekordi.h>
 
 DVideoBim::DVideoBim(int kvizId, QWidget *parent)
     : QWidget(parent),
       m_kvizId(kvizId),
-      m_status(S_IDLE)
+      m_status(S_IDLE),
+      m_wRekordi(nullptr)
 {
-    setWindowTitle(tr("Android Kviz"));
     setupGui();
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     
@@ -69,6 +70,8 @@ void DVideoBim::setupGui(void)
     m_wQuizControl = new WQuizControl(this);
     connect(m_wQuizControl, SIGNAL(sledecePitanje(int, QTime)),
             this, SLOT(sledecePitanje(int, QTime)));
+    connect(m_wQuizControl, SIGNAL(rekordi()),
+            this, SLOT(rekordi()));
     
     m_splitter->addWidget(m_wQuizControl);
     
@@ -88,15 +91,22 @@ void DVideoBim::sledecePitanje(int tip, QTime vreme)
     switch(tip)
     {
         case Kviz::BrziPrsti:
+            if(m_wRekordi)
+            {
+                delete m_wRekordi;
+                m_wRekordi = nullptr;
+            }
             rbPitanja = qrand() % m_brziPrsti.size();
             BrziPrsti tmp = m_brziPrsti.at(rbPitanja);
-            m_brziPrsti.removeAt(rbPitanja);
             m_wBrziPrsti = new WBrziPrsti(&tmp, this);
             m_splitter->addWidget(m_wBrziPrsti);
             m_splitter->setStretchFactor(1, 1);
             m_zadatoVreme = vreme;
             m_wBrziPrsti->setMaxVreme(vreme.second() + 60 * vreme.minute());
             m_trenutnoVreme.setHMS(0, 0, 0);
+            m_bodovi = m_rekordi.size();
+            m_rbPitanja = rbPitanja;
+            m_status = S_BrziPrsti;
             m_timer->start();
             break;
     }
@@ -104,6 +114,31 @@ void DVideoBim::sledecePitanje(int tip, QTime vreme)
 
 void DVideoBim::rekordi(void)
 {
+    if(m_wRekordi)
+        return;
+    
+    QList<Takmicar> rekordi;
+    for(auto id : m_rekordi.keys())
+    {
+        Takmicar takmicar = m_rekordi[id];
+        int i;
+        for(i = 0; i < rekordi.size(); i++)
+        {
+            if(takmicar.getBodoviUkupno() > rekordi[i].getBodoviUkupno())
+            {
+                rekordi.insert(i, takmicar);
+                break;
+            }
+        }
+        if(i == rekordi.size())
+        {
+            rekordi.append(takmicar);
+        }
+    }
+    
+    m_wRekordi = new WRekordi(rekordi, this);
+    m_splitter->addWidget(m_wRekordi);
+    m_splitter->setStretchFactor(1, 1);
 }
 
 void DVideoBim::pitanjeTimeout(void)
@@ -114,12 +149,18 @@ void DVideoBim::pitanjeTimeout(void)
     {
         delete m_wBrziPrsti;
         m_wQuizControl->zavrsiPitanje();
+        m_status = S_IDLE;
         m_timer->stop();
+        m_brziPrsti.removeAt(m_rbPitanja);
     }
 }
 
 void DVideoBim::recivedData(int id, QString data)
 {
+    if(data.isEmpty())
+        return;
+    
+    data = data.remove(data.size() - 1, 1);     // Zbog testiranja, kasnije mozda ukloniti
     switch(m_status)
     {
         case S_Prijava:
@@ -129,6 +170,16 @@ void DVideoBim::recivedData(int id, QString data)
                 m_rekordi[id] = takmicar;
             }
             break;
+        case S_BrziPrsti:
+            if(m_rekordi.contains(id))
+            {
+                if(data[0].toUpper() ==
+                    m_brziPrsti.at(m_rbPitanja).getOdgovor().toUpper())
+                {
+                    m_rekordi[id].addBodoviBrziPrsti(m_bodovi);
+                    m_bodovi--;
+                }
+            }
+            break;
     }
-    qDebug() << m_rekordi[id].getIme();
 }
