@@ -91,6 +91,7 @@ void WQuizControl::btnSledecePitanje_click(void)
         m_sbBrojPitanja[BrziPrsti]->setMaximum(m_sbBrojPitanja[BrziPrsti]->maximum() - 1);
         m_sliderBrojPitanja[BrziPrsti]->setMaximum(m_sliderBrojPitanja[BrziPrsti]->maximum() - 1);
         m_btnSledecePitanje->setEnabled(false);
+        m_btnRekordi->setEnabled(false);
         emit sledecePitanje(Kviz::BrziPrsti, vreme);
     }
 }
@@ -109,4 +110,5 @@ void WQuizControl::setBrojBrzihPrstiju(int brojBrzihPrstiju)
 void WQuizControl::zavrsiPitanje(void)
 {
     m_btnSledecePitanje->setEnabled(true);
+    m_btnRekordi->setEnabled(true);
 }

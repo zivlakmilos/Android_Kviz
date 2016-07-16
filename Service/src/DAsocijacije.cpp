@@ -14,7 +14,7 @@ DAsocijacije::DAsocijacije(Kviz* kviz, QWidget* parent)
     : QTableView(parent),
       m_kviz(kviz)
 {
-    setWindowTitle(tr("Ko zna zna: %1").arg(m_kviz->getNaziv()));
+    setWindowTitle(tr("Asocijacije: %1").arg(m_kviz->getNaziv()));
     
     Database db;
     if(db.open())
